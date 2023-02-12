@@ -1,0 +1,25 @@
+.Sidebar {
+  display: flex;
+  position: fixed;
+  z-index: 100;
+  left: 0;
+  top: 0;
+  width: 64px;
+  height: 100vh;
+  background-color: black;
+  align-items: center;
+  flex-direction: column;
+}
+.Sidebar .SideButton {
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  width: 40px;
+  margin: 12px 0;
+  border-radius: 64px;
+}
+.Sidebar .SideButton:hover {
+  background-color: #292D32;
+}/*# sourceMappingURL=Sidebar.css.map */

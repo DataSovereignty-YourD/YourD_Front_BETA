@@ -1,0 +1,35 @@
+.File_Upload_body {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  height: 55%;
+  font-size: 1.5rem;
+}
+.File_Upload_body .UploadIcon {
+  width: 150px;
+  height: 150px;
+  margin-bottom: 10px;
+}
+.File_Upload_body .Circle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border-radius: 100%;
+  z-index: -1;
+  background-color: #1e1e1e;
+}
+
+.File_Upload_Text {
+  margin-Top: 50px;
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 2rem;
+}/*# sourceMappingURL=addads.css.map */

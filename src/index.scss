@@ -1,0 +1,34 @@
+//Navi
+@import "./styles/pages/main.scss";
+@import "./styles/pages/Navi/topbar.scss";
+@import "./styles/pages/Navi/sidebar.scss";
+
+//components
+@import "./styles/components/ads/analyticschart.scss";
+@import "./styles/components/ads/overview.scss";
+@import "./styles/pages/dashBoard.scss";
+//ads
+@import "./styles/components/ads/adsModal/adsUpload.scss";
+@import "./styles/components/ads/adsModal/detail.scss";
+@import "./styles/components/ads/adsModal/addAdsStep.scss";
+@import "./styles/components/ads/adsModal/videoInfo.scss";
+
+//cone
+@import "./styles/components/cone/coneMap.scss";
+@import "./styles/components/cone/coneShop.scss";
+
+html {
+    font-size: 20px;
+}
+
+body {
+    margin: 0;
+    background-color: black;
+    color: white;
+}
+
+.map-container1 {
+    width: 100%;
+    height: 100%;
+    border-radius: 1rem;
+}

@@ -1,0 +1,56 @@
+.Overview {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    font-size: 2rem;
+    width: 100%;
+    .OverviewSection {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-top:1rem;
+    }
+
+    .OverviewBox {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 200px;
+        height: 120px;
+        border-radius: 1.5rem;
+        
+        
+        background: #303030;
+        font-size: 1rem;
+    }
+
+    .Overview_Title{
+        font-size: 1rem;
+        padding-bottom: 0.5rem;
+    }
+
+    .Overview_Num {
+        display: flex;
+        font-size: 1.3rem;
+        padding-bottom: 0.5rem;
+
+        align-items: center;
+    }
+    .Overview_PreNum {
+        font-size: 0.8rem;
+    }
+
+    .DepositBox {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 120px;
+        height: 120px;
+        border-radius: 1.5rem;
+
+        background: #303030;
+        font-size: 1rem;
+    }
+}

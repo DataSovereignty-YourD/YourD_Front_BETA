@@ -1,0 +1,58 @@
+.TopBar {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100vw;
+    height: 64px;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    background-color: black;
+    flex-direction: row;
+    color: white;
+    .Logo {
+        margin-left: 2rem;
+    }
+    .leftSection{
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        .menu {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            margin: 12px;
+            &:hover {
+                border-radius: 2rem;
+                background-color: #292D32;
+            }
+        }
+    }
+
+    .Button_sction{
+        display: flex;
+        position: relative;
+        right:0;
+        margin-right: 3rem;
+        flex-direction: row;
+    }
+
+    .Button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: auto;
+        height: 46px;
+        padding: 0 0.5rem;
+        border-radius: 2rem;
+        margin-right: 0.5rem;
+        background-color: black;
+        &:hover {
+            background-color: #292D32;
+        }
+    }
+
+}

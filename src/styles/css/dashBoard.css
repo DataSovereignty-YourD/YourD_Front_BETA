@@ -1,0 +1,24 @@
+.main {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  flex-direction: row;
+}
+.main .AnalyticsPart {
+  display: flex;
+  margin-left: 100px;
+  margin-top: 100px;
+  width: 50%;
+  flex-direction: column;
+}
+.main .ConePart {
+  display: flex;
+  flex-direction: column;
+  width: 45%;
+  margin-top: 100px;
+  margin-left: 5%;
+}
+.main .Cone_title {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}/*# sourceMappingURL=dashBoard.css.map */

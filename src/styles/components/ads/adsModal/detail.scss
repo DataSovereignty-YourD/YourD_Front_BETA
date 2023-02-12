@@ -1,0 +1,87 @@
+.Container {
+    .Background {
+        .Modal {
+            .AddAds_Modal_body {
+                .DetailBody {
+                    display: flex;
+                    flex-direction: row;
+                    padding: 0 2%;
+                    height: 70%;
+                    .DetailInput {
+                        display: flex;
+                        flex-direction: column;
+                        width: 70%;
+                        .DetailBodyTitle {
+                            width: 100%;
+                            font-size: 1.5rem;
+                        }
+                        .AdsDetailTitleBox{
+                            display: flex;
+                            flex-direction: column;
+                            width: 100%;
+                            height: 80px;
+                            border-radius: 10px;
+                            color: skyblue;
+                            background-color: #1e1e1e; 
+                            margin: 3% 0;
+                            font-size: 0.8rem;
+                            .DetailTitleTextBox{
+                                color:white;
+                                background: none;
+                                border: none;
+                                height: 100%;
+                            }
+                        }
+                        .AdsDetailDescriptionBox{
+                            display: flex;
+                            flex-direction: column;
+                            width: 100%;
+                            height: 150px;
+                            border-radius: 10px;
+                            color: skyblue;
+                            background-color: #1e1e1e;
+                            font-size: 0.8rem;
+                            .DetailDescriptionTextBox{
+                                color:white;
+                                background: none;
+                                border: none;
+                                height: 100%;
+                            }
+                        }
+                    }
+                }
+                .AdsViewSection {
+                    display: flex;
+                    flex-direction: column;
+                    margin-top: 55px;
+                    height: 100%;
+                    width: 28%;
+                    margin-left: 2%;
+                    .AdsViewBox {
+                        width: 100%;
+                        height: 200px;
+                        border-radius: 10px;
+                        background-color: #1e1e1e;
+                    }
+                }
+            }
+            .ButtonPosition{
+                display: flex;
+                position: absolute;
+                bottom:30px;
+                right: 50px;
+                .ModalSmallButton {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 80px;
+                    height: 40px;
+                    border-radius: 10px;
+                    text-align: center;
+                    background-color: #1e1e1e;
+                    margin-left: 10px;
+                }
+            }
+        }
+    }
+}

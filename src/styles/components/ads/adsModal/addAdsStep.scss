@@ -1,0 +1,38 @@
+.Modal_Step {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-around;
+    padding: 2% 0;
+    .Step_Box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 60px;
+        width: 120px;
+        .Step_Title {
+            font-size: 1.2rem;
+            text-align: center;
+        }
+        .Step_Line {
+            display: inline-flex;
+            margin-top: 45px;
+            padding-left: 30px;
+            width: 210px;
+            
+            height: 0;
+            border: 1px solid black;
+            z-index: -1;
+            
+        }
+    }
+}
+@media screen and (max-width: 960px) {
+    .Modal_Step {
+        .Step_Box {
+            .Step_Line {
+                width:175px;
+            }
+        }
+    }
+}

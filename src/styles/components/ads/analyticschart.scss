@@ -1,0 +1,17 @@
+.Ads_Analytics {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    margin-top:50px;
+
+    .Analytics_title {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+    .chart {
+        width: 100%;
+        height: 30vh;
+        background-color: #303030;
+        border-radius: 1rem;
+    }
+}
