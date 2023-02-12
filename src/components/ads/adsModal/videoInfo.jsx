@@ -34,7 +34,7 @@ const VideoInfoBody = () => {
       } else if (!checked) {
         setSelectList(selectedList.filter((el) => el !== itemId));
       }
-      console.log(selectedList);
+      dispatch(Categorydatastore(selectedList));
     };
 
     return (

@@ -5,7 +5,7 @@ import AdsUpload from './components/ads/adsModal/adsUpload';
 import Detail from './components/ads/adsModal/detail';
 import VideoInfo from './components/ads/adsModal/videoInfo';
 import SetCone from './components/ads/adsModal/SetCone';
-
+import Check from './components/ads/adsModal/adsInfoCheck'
 function App() {
   const location = useLocation();
   const background = location.state && location.state.background;
@@ -18,6 +18,7 @@ function App() {
           <Route path="Detail" element={<Detail />} />
           <Route path="VideoInfo" element={<VideoInfo />} />
           <Route path="SetCone" element={<SetCone />} />
+          <Route path="Check" element={<Check />} />
         </Route>
       </Routes>
 
@@ -28,6 +29,7 @@ function App() {
           <Route path="Detail" element={<Detail />} />
           <Route path="VideoInfo" element={<VideoInfo />} />
           <Route path="SetCone" element={<SetCone />} />
+          <Route path="Check" element={<Check />} />
         </Routes>
       )}
     </>

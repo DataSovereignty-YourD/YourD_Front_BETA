@@ -1,0 +1,15 @@
+.SetConeBody {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    .SetConeMap {
+        display: flex;
+        justify-content: center;
+        width: 80%;
+        height: 70%;
+    
+    }
+
+}
