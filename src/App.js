@@ -4,6 +4,8 @@ import ConeShopModal from './components/cone/coneShop';
 import AdsUpload from './components/ads/adsModal/adsUpload';
 import Detail from './components/ads/adsModal/detail';
 import VideoInfo from './components/ads/adsModal/videoInfo';
+import SetCone from './components/ads/adsModal/SetCone';
+
 function App() {
   const location = useLocation();
   const background = location.state && location.state.background;
@@ -15,6 +17,7 @@ function App() {
           <Route exact path="AdsUploadModal" element={<AdsUpload />} />
           <Route path="Detail" element={<Detail />} />
           <Route path="VideoInfo" element={<VideoInfo />} />
+          <Route path="SetCone" element={<SetCone />} />
         </Route>
       </Routes>
 
@@ -24,6 +27,7 @@ function App() {
           <Route path="AdsUploadModal" element={<AdsUpload />} />
           <Route path="Detail" element={<Detail />} />
           <Route path="VideoInfo" element={<VideoInfo />} />
+          <Route path="SetCone" element={<SetCone />} />
         </Routes>
       )}
     </>

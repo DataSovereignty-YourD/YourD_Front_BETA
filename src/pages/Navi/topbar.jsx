@@ -12,8 +12,6 @@ import { Link, useLocation } from "react-router-dom";
 
 const TopBar = () => {
   document.body.style = `overflow-y: scroll;`;
-  // const dispatch = useDispatch();
-  // const SwitchValue = useSelector(ModalSwitchValue);
   const location = useLocation();
   
   const MenuButton = () => {

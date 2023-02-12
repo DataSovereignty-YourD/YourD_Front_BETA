@@ -1,0 +1,58 @@
+.DetailBody {
+    .CategorySection {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        word-break: keep-all;
+
+        .CategoryTitle {
+            padding: 10px 0;
+            font-size: 1.2rem;
+        }
+
+        .CategorySelect {
+            display: flex;
+            flex-wrap: wrap;
+            margin-top: 20px;
+            width: 100%;
+            height: auto;
+            .SelectBox {
+                display: flex;
+                position: relative;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+                white-space: nowrap;
+                width: auto;
+                padding: 20px 20px;
+                margin-right: 10px;
+                margin-bottom: 20px;
+                background-color: #655D53;
+                border-radius: 10px;
+                border: 1px solid white;
+                &:hover {
+                    color:aquamarine;
+                }
+            }
+
+            .CategoryBox {
+                display: flex;
+                position: relative;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+                white-space: nowrap;
+                width: auto;
+                padding: 20px 20px;
+                margin-right: 10px;
+                margin-bottom: 20px;
+                background-color: #1e1e1e;
+                border-radius: 10px;
+                border: 1px solid white;
+                &:hover {
+                    color:aquamarine;
+                }
+            }
+        }
+    }
+}
