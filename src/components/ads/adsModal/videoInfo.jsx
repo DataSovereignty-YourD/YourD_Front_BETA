@@ -20,8 +20,6 @@ const CATEGORY_LIST = [
   { id: 8, data: "Literature" },
 ];
 
-
-
 const VideoInfoBody = () => {
   const dispatch = useDispatch();
   const SelectValue = useSelector(CategorySelectValue);
@@ -35,6 +33,7 @@ const VideoInfoBody = () => {
         setSelectList(selectedList.filter((el) => el !== itemId));
       }
       dispatch(Categorydatastore(selectedList));
+      
     };
 
     return (
@@ -90,6 +89,7 @@ const VideoInfoBody = () => {
             className="ModalSmallButton"
             onClick={() => {
               dispatch(Categorydatastore(selectedList))}}
+              
           >
             Next
           </Link>

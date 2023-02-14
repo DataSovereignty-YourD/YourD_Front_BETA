@@ -2,11 +2,14 @@ import InitMap from "../../../map";
 import { AddAdsModalTop } from "./detail";
 import { useNavigate,useLocation,Link } from "react-router-dom";
 import { StepSetCone } from "./addAdsStep";
-// import { useDispatch} from "react-redux";
+import { ConeAssetsValue } from "../../../redux/ConeAssetsReducer";
+import { useDispatch, useSelector} from "react-redux";
+import { Fragment } from "react";
 const BackNextButton = () => {
   const navigate = useNavigate();
   const location = useLocation();
 // const dispatch = useDispatch();
+  
   const Back = () => {
     return (
       <div
@@ -35,6 +38,26 @@ const BackNextButton = () => {
   );
 };
 
+const ConeBalance = () => {
+  const ConeAsset = useSelector(ConeAssetsValue);
+  console.log(ConeAsset);
+  return(
+    <section className="BalanceSection">
+      {ConeAsset.map((asset)=> {
+        if(asset.Count > 0) {
+          return (
+              <div className="BalanceBox" style={{backgroundColor: asset.color}}>
+                {asset.Distance}: {asset.Count}
+              </div>
+              
+            
+          )
+        }
+      })}
+    </section>
+  )  
+}
+
 const SetCone = () => {
     document.body.style = `overflow-y: hidden;`;
   return (
@@ -46,6 +69,7 @@ const SetCone = () => {
             <StepSetCone />
             <div className="SetConeMap">
               <InitMap />
+              <ConeBalance/>
             </div>
             <BackNextButton/>
           </div>

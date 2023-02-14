@@ -11,5 +11,27 @@
         height: 70%;
     
     }
-
+    .BalanceSection{
+        display: flex;
+        flex-direction: column;
+        right: 130px;
+        top: 300px;
+        position: absolute;
+        width: auto;
+        height: auto;
+        border-radius: 10px;
+        background-color: rgba(0, 0, 0, 0.7);
+        .BalanceBox {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            width: 70px;
+            height: 30px;
+            border-radius: 20px;
+            margin: 10px 10px;
+            padding: 0 5px;
+            font-size: 0.8rem;
+        }
+    }
 }

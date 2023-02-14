@@ -1,23 +1,40 @@
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
-import {useMemo} from "react";
+import { useMemo, useState, useEffect } from "react";
+import BlueCone from "../assets/BlueCone.svg";
 
-
-// Initialize and add the map
 function InitMap() {
-    const { isLoaded } = useLoadScript({
-        googleMapsApiKey : process.env.REACT_APP_GOOGLE_MAP_API,
-    })
+  const { isLoaded } = useLoadScript({
+    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAP_API,
+  });
+  const [currentPosition, setCurrentPosition] = useState(null);
 
-    if (!isLoaded) return <div>Loading...</div>
-    return <Map/>;
-  }
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const { latitude, longitude } = position.coords;
+        setCurrentPosition({ lat: latitude, lng: longitude });
+      },
+      (error) => console.error(error)
+    );
+  }, []);
 
-export function Map() {
-  const center = useMemo(()=>({lat:37.61973258701472,lng: 127.0586734811029}),[]); 
-    return <GoogleMap zoom={17} center={center} mapContainerClassName="map-container1">
-      <Marker position={center} />
-    </GoogleMap>
+  if (!isLoaded) return <div>Loading...</div>;
+
+  return <Map currentPosition={currentPosition} />;
 }
 
-  
-  export default InitMap;
+export const Map = ({ currentPosition }) => {
+  const center = currentPosition;
+
+  return (
+    <GoogleMap zoom={17} center={center} mapContainerClassName="map-container1">
+      {currentPosition && <Marker position={currentPosition} />}
+      {/* <Marker
+        position={center}
+        icon={{ url: BlueCone, scaledSize: { width: 35, height: 35 } }}
+      /> */}
+    </GoogleMap>
+  );
+};
+
+export default InitMap;

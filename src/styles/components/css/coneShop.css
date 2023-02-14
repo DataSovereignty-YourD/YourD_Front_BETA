@@ -87,16 +87,72 @@
   padding-top: 3%;
 }
 .Container .Background .Modal .Modal_body .ConeShop_body_Right {
-  display: flex;
+  display: block;
   flex-direction: column;
   justify-content: space-between;
   width: 18%;
   min-width: 200px;
   height: 100%;
   padding-left: 2%;
+  overflow-y: initial !important;
+  overflow: hidden;
 }
-.Container .Background .Modal .Modal_body .ConeShop_body_Right .Cone_List {
+.Container .Background .Modal .Modal_body .ConeShop_body_Right .SelectConeSection {
+  display: flex;
+  position: absolute;
+  justify-content: space-between;
+  left: 650px;
+  top: 220px;
+  width: auto;
+  height: auto;
+  flex-direction: column;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 10px;
+  z-index: 100;
+  overflow-y: auto;
+}
+.Container .Background .Modal .Modal_body .ConeShop_body_Right .SelectConeSection .ConeListBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  width: 60px;
+  height: 30px;
+  margin: 10px 10px;
+}
+.Container .Background .Modal .Modal_body .ConeShop_body_Right .ConeListSection .Cone_List {
   font-size: 1.5rem;
+}
+.Container .Background .Modal .Modal_body .ConeShop_body_Right .ConeListSection .SelectedCone {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 80px;
+  background-color: #1E1E1E;
+  border-radius: 10px;
+  margin: 20px 0;
+}
+.Container .Background .Modal .Modal_body .ConeShop_body_Right .ConeListSection .SelectedCone .ConeDistance {
+  margin-left: 10px;
+  padding: 10px 0;
+}
+.Container .Background .Modal .Modal_body .ConeShop_body_Right .ConeListSection .SelectedCone .ConeCountandPrice {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.Container .Background .Modal .Modal_body .ConeShop_body_Right .ConeListSection .SelectedCone .ConeCountandPrice .Count {
+  display: flex;
+  align-items: flex-end;
+  font-size: 0.7rem;
+  margin-left: 10px;
+  padding: 10px 0;
+}
+.Container .Background .Modal .Modal_body .ConeShop_body_Right .ConeListSection .SelectedCone .ConeCountandPrice .Price {
+  font-size: 0.9rem;
+  margin-right: 10px;
+  padding: 10px 0;
 }
 .Container .Background .Modal .Modal_body .ConeShop_body_Right .Payment_Section {
   display: flex;
@@ -109,6 +165,56 @@
 .Container .Background .Modal .Modal_body .ConeShop_body_Right .Payment_Section .PaymentBox {
   border-radius: 1rem;
   width: 100%;
-  height: 100px;
+  height: auto;
   background-color: #1E1E1E;
+}
+.Container .Background .Modal .Modal_body .ConeShop_body_Right .Payment_Section .PaymentBox .TotalCount {
+  padding-top: 20px;
+  margin-left: 10px;
+  font-size: 0.9rem;
+}
+.Container .Background .Modal .Modal_body .ConeShop_body_Right .Payment_Section .PaymentBox .TotalPrice {
+  padding-bottom: 20px;
+  margin-left: 10px;
+  font-size: 0.9rem;
+}
+.Container .Background .Modal .Modal_body .ConeShop_body_Right .Payment_Section .PaymentBox .PayButton {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: auto;
+  text-decoration: none;
+  color: white;
+  border: 0;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px 0 rgb(152, 160, 180);
+  padding: 5px 0;
+  z-index: 0;
+}
+.Container .Background .Modal .Modal_body .ConeShop_body_Right .Payment_Section .PaymentBox .PayButton .fill-one {
+  position: absolute;
+  background-image: linear-gradient(to right, #E040FB, #00BCD4);
+  height: 70px;
+  width: 500px;
+  border-radius: 5px;
+  margin: -40px 0 0 -200px;
+  z-index: -1;
+  transition: all 0.4s ease;
+}
+.Container .Background .Modal .Modal_body .ConeShop_body_Right .Payment_Section .PaymentBox .PayButton:hover .fill-one {
+  -webkit-transform: translateX(100px);
+  -moz-transform: translateX(100px);
+  transform: translateX(100px);
+}
+.Container .Background .Modal .Modal_body .ConeShop_body_Right::-webkit-scrollbar {
+  width: 5px;
+  height: 10px;
+  background-color: none;
+}
+.Container .Background .Modal .Modal_body .ConeShop_body_Right::-webkit-scrollbar-thumb {
+  background-color: white;
+  border-radius: 5px;
 }/*# sourceMappingURL=coneShop.css.map */
