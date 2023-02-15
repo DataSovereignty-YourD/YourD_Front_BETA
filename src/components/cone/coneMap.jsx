@@ -1,10 +1,41 @@
-import InitMap from "../../map";
+// import InitMap from "../../map";
+import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
+import {  useState, useEffect } from "react";
+import D100Cone from "../../assets/D100Cone.svg";
 
-const ConeMap =()=> {
-  
-  return <div className="MapBox">
-    <InitMap/>
-  </div>;
+function ConeMap() {
+  const { isLoaded } = useLoadScript({
+    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAP_API,
+  });
+  const [currentPosition, setCurrentPosition] = useState(null);
+
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const { latitude, longitude } = position.coords;
+        setCurrentPosition({ lat: latitude, lng: longitude });
+      },
+      (error) => console.error(error)
+    );
+  }, []);
+
+  if (!isLoaded) return <div>Loading...</div>;
+
+  return <ExampleMap currentPosition={currentPosition} />;
 }
+
+export const ExampleMap = ({ currentPosition }) => {
+  const center = currentPosition;
+
+  return (
+    <GoogleMap zoom={17} center={center} mapContainerClassName="map-container1">
+      {currentPosition && <Marker position={currentPosition} />}
+      <Marker
+        position={center}
+        icon={{ url: D100Cone, scaledSize: { width: 35, height: 35 } }}
+      />
+    </GoogleMap>
+  );
+};
 
 export default ConeMap;

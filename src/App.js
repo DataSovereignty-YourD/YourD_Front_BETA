@@ -1,4 +1,4 @@
-import { Route, Router, Routes,useLocation } from 'react-router-dom';
+import { Route,  Routes,useLocation } from 'react-router-dom';
 import Main from './pages/main';
 import ConeShopModal from './components/cone/coneShop';
 import AdsUpload from './components/ads/adsModal/adsUpload';

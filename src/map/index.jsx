@@ -1,6 +1,6 @@
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
-import { useMemo, useState, useEffect } from "react";
-import BlueCone from "../assets/BlueCone.svg";
+import { useState, useEffect } from "react";
+// import BlueCone from "../assets/BlueCone.svg";
 
 function InitMap() {
   const { isLoaded } = useLoadScript({
