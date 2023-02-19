@@ -1,12 +1,4 @@
 import { Icon } from "@iconify/react";
-// import ConeShop from "../../components/cone/coneShop";
-// import AdsUpload from "../../components/ads/adsModal/adsUpload";
-// import {
-//   ModalSwitchValue,
-//   ConeShopModalOpen,
-//   AddAdsModalOpen,
-// } from "../../redux/ModalReducer";
-// import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 
 

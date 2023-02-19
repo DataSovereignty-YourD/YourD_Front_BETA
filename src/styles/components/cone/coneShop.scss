@@ -101,8 +101,7 @@
                     min-width: 200px;
                     height: 100%;
                     padding-left: 2%;
-                    overflow-y: initial !important;
-                    overflow: hidden;
+                    
                     
                     .SelectConeSection{
                         display: flex;
@@ -131,6 +130,10 @@
                         }
                     }
                     .ConeListSection{
+                        height: 75%;
+                        overflow: hidden;
+                        overflow-y: initial !important;
+                        overflow: hidden;
                         .Cone_List{
                             font-size: 1.5rem;
                         }
@@ -141,6 +144,7 @@
                             height: 80px;
                             background-color: #1E1E1E;
                             border-radius: 10px;
+                            padding: 5px 0;
                             margin: 20px 0;
                             .ConeDistance {
                                 margin-left: 10px;
@@ -150,23 +154,51 @@
                                 display: flex;
                                 flex-direction: row;
                                 justify-content: space-between;
-                                .Count {
+                                align-items: center;
+                                .Remove {
                                     display: flex;
-                                    align-items: flex-end;
+                                    justify-content: center;
+                                    align-items: center;
+                                    text-align: center;
                                     font-size: 0.7rem;
-                                    margin-left: 10px;
-                                    padding: 10px 0;
-                                }
+                                    margin-left: 5px;
+                                    margin-bottom: 5px;
+                                    width: 80px;
+                                    height: 30px;
+                                    border-radius: 10px;
+                                    transition: 0.5s;
+                                        background-size: 200% auto;
+                                        color: white;
+                                        /* text-shadow: 0px 0px 10px rgba(0,0,0,0.2);*/
+                                        // box-shadow: 0 0 10px #eee;
+                                        border-radius: 10px;
+                                        background-image: linear-gradient(to right, #fbc2eb 0%, #a6c1ee 51%, #fbc2eb 100%);
+
+                                        &:hover {
+                                            background-position: right center;
+                                        }
+                                    }
                                 .Price {
                                     font-size: 0.9rem;
                                     margin-right: 10px;
                                     padding: 10px 0;
+                                    margin-bottom: 5px;
                                 }
                             }
                         }
                     }
+                    .ConeListSection::-webkit-scrollbar{
+                        width: 5px;
+                        height: 10px;
+                        background-color: none;
+                    }
+                    .ConeListSection::-webkit-scrollbar-thumb{
+                        background-color: white;
+                        border-radius: 5px;
+                    }
                     .Payment_Section{
                         display: flex;
+                        position: relative;
                         flex-direction: column;
                         .Payment {
                             font-size: 1.5rem;
@@ -174,16 +206,17 @@
                         }
                         .PaymentBox{
                             border-radius: 1rem;
-                            width: 100%;
+                            width: 200px;
                             height: auto;
                             background-color: #1E1E1E;
+                            
                             .TotalCount {
                                 padding-top: 20px;
                                 margin-left: 10px;
                                 font-size: 0.9rem;
                             }
                             .TotalPrice {
-                                padding-bottom: 20px;
+                                padding-bottom: 15px;
                                 margin-left: 10px;
                                 font-size: 0.9rem;
                             }
@@ -199,10 +232,12 @@
                                 color:white;
                                 border: 0;
                                 border-radius: 5px;
+                                margin-bottom: 5px;
                                 overflow: hidden;
-                                box-shadow: 0 4px 12px 0 rgba(152, 160, 180, 10);
+                                box-shadow: 0 2px 8px 0 rgba(152, 160, 180, 10);
                                 padding: 5px 0;
                                 z-index: 0;
+                                
                                 .fill-one {
                                     position: absolute;
                                     background-image: linear-gradient(to right, #E040FB, #00BCD4);
@@ -222,15 +257,7 @@
                         }
                     }
                 }
-                .ConeShop_body_Right::-webkit-scrollbar{
-                        width: 5px;
-                        height: 10px;
-                        background-color: none;
-                }
-                .ConeShop_body_Right::-webkit-scrollbar-thumb{
-                    background-color: white;
-                    border-radius: 5px;
-                }
+                
             }
         }
     }

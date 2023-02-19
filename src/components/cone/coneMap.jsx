@@ -1,5 +1,6 @@
 // import InitMap from "../../map";
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
+import { addListener } from "@reduxjs/toolkit";
 import {  useState, useEffect } from "react";
 import D100Cone from "../../assets/D100Cone.svg";
 
@@ -18,15 +19,15 @@ function ConeMap() {
       (error) => console.error(error)
     );
   }, []);
-
+  
   if (!isLoaded) return <div>Loading...</div>;
-
+  
   return <ExampleMap currentPosition={currentPosition} />;
 }
 
 export const ExampleMap = ({ currentPosition }) => {
   const center = currentPosition;
-
+  
   return (
     <GoogleMap zoom={17} center={center} mapContainerClassName="map-container1">
       {currentPosition && <Marker position={currentPosition} />}
