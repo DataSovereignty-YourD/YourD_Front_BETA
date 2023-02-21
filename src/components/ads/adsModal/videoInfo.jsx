@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { StepVideoInfo } from "./addAdsStep";
 import { AddAdsModalTop } from "./detail";
 import {
   CategorySelectValue,
   Categorydatastore,
-} from "../../../redux/CategoryReducer";
+  DepositValue,
+  TokenDepositValue,
+  AdsRewardStore,
+} from "../../../redux/AdsUploadReducer";
 import { useDispatch, useSelector } from "react-redux";
 
 const CATEGORY_LIST = [
@@ -24,7 +27,7 @@ const VideoInfoBody = () => {
   const dispatch = useDispatch();
   const SelectValue = useSelector(CategorySelectValue);
   const [selectedList, setSelectList] = useState(SelectValue);
-  
+
   const CategoryBoxs = () => {
     const SelectElement = (checked, itemId) => {
       if (checked) {
@@ -33,7 +36,7 @@ const VideoInfoBody = () => {
         setSelectList(selectedList.filter((el) => el !== itemId));
       }
       dispatch(Categorydatastore(selectedList));
-      
+
     };
 
     return (
@@ -65,44 +68,47 @@ const VideoInfoBody = () => {
     );
   };
 
-  const DetailAdsView = () => {
-    const BackNextButton = () => {
-      const navigate = useNavigate();
-      const location = useLocation();
-  
-      const Back = () => {
-        return (
-          <div className="ModalSmallButton" onClick={() => {
-            dispatch(Categorydatastore(selectedList));
-            navigate(-1);
-            console.log(SelectValue);
-            }}>
-            Back
-          </div>
-        );
-      };
-      const Next = () => {
-        return (
-          <Link
-            to="/SetCone"
-            state={{ background: location }}
-            className="ModalSmallButton"
-            onClick={() => {
-              dispatch(Categorydatastore(selectedList))}}
-              
-          >
-            Next
-          </Link>
-        );
-      };
-  
+  const BackNextButton = () => {
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const Back = () => {
       return (
-        <div className="ButtonPosition">
-          <Back />
-          <Next />
+        <div className="ModalSmallButton" onClick={() => {
+          dispatch(Categorydatastore(selectedList));
+          navigate(-1);
+          console.log(SelectValue);
+          }}>
+          Back
         </div>
       );
     };
+    const Next = () => {
+      return (
+        <Link
+          to="/SetCone"
+          state={{ background: location }}
+          className="ModalSmallButton"
+          onClick={() => {
+            dispatch(Categorydatastore(selectedList))}}
+
+        >
+          Next
+        </Link>
+      );
+    };
+
+    return (
+      <div className="ButtonPosition">
+        <Back />
+        <Next />
+      </div>
+    );
+  };
+
+  
+
+  const DetailAdsView = () => {
     return (
       <>
         <section className="AdsViewSection">
@@ -113,23 +119,57 @@ const VideoInfoBody = () => {
     );
   };
 
+  const Deposit =()=> {
+    const dispatch = useDispatch();
+    const DepositTokenValue = useSelector(TokenDepositValue);
+    console.log(DepositTokenValue);
+    const TokenValuehandler =()=> {
+      const TokenValue = document.getElementById("DepositValue");
+      dispatch(DepositValue(TokenValue.value));
+    }
+    return (
+      <Fragment>
+        <input type="number" id="DepositValue" className="DepositInput" />
+        <button className="DepositButton" onClick={TokenValuehandler}>Deposit</button>
+      </Fragment>
+    )
+  }
+
+  const Reward =()=> {
+    const dispatch = useDispatch();
+
+    const RewardValuehandler =()=> {
+      const Reward = document.getElementById("RewardValue");
+      dispatch(AdsRewardStore(Reward.value));
+    }
+    return (
+      <Fragment>
+        <input type="number" id="RewardValue" className="DepositInput" />
+        <button className="DepositButton" onClick={RewardValuehandler}>Check</button>
+      </Fragment>
+    )
+  }
+
+
   return (
     <section className="DetailBody">
       <section className="DetailInput">
         <div className="DetailBodyTitle">Video Info</div>
         <section className="CategorySection">
-          <div className="CategoryTitle">Category Settings</div>
+          <div className="SmallTitle">Category Settings</div>
           <CategoryBoxs />
+        </section>
+        <section className="TokenSection">
+        <div className="SmallTitle">Deposit Token</div>
+          <Deposit/>
+        <div className="SmallTitle">Reward per Person</div>
+          <Reward/>
         </section>
       </section>
       <DetailAdsView />
     </section>
   );
 };
-
-
-
-
 
 const VideoInfo = () => {
   document.body.style = `overflow-y: hidden;`;

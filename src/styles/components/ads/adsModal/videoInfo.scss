@@ -5,7 +5,7 @@
         width: 100%;
         word-break: keep-all;
 
-        .CategoryTitle {
+        .SmallTitle {
             padding: 10px 0;
             font-size: 1.2rem;
         }
@@ -24,7 +24,7 @@
                 text-align: center;
                 white-space: nowrap;
                 width: auto;
-                padding: 20px 20px;
+                padding: 15px 15px;
                 margin-right: 10px;
                 margin-bottom: 20px;
                 background-color: #655D53;
@@ -43,7 +43,7 @@
                 text-align: center;
                 white-space: nowrap;
                 width: auto;
-                padding: 20px 20px;
+                padding: 15px 15px;
                 margin-right: 10px;
                 margin-bottom: 20px;
                 background-color: #1e1e1e;
@@ -53,6 +53,47 @@
                     color:aquamarine;
                 }
             }
+        }
+    }
+    .TokenSection {
+        .SmallTitle {
+            padding: 10px 0;
+            font-size: 1.2rem;
+        }
+        .DepositInput{
+            width: 50%;
+            height: 50px;
+            font-size: 1rem;
+            background-color: #1e1e1e;
+            border-radius: 10px;
+            border: none;
+            padding: 5px 10px;
+            color: white;
+            margin-bottom: 20px;
+        }
+        .DepositButton {
+            display:inline-block;
+            box-shadow:inset 1px 0px 8px 4px #23395e;
+            background:linear-gradient(to bottom, #2e466e 5%, #415989 100%);
+            background-color:#2e466e;
+            border-radius:20px;
+            border:1px solid #1f2f47;
+            cursor:pointer;
+            color:#ffffff;
+            font-family:Verdana;
+            font: size 1.2rem;;
+            padding:14px 30px;
+            text-decoration:none;
+            text-shadow:-1px 5px 3px #263666;
+            margin-left: 30px;
+        }
+        .DepositButton:hover {
+            background:linear-gradient(to bottom, #415989 5%, #2e466e 100%);
+            background-color:#415989;
+        }
+        .DepositButton:active {
+            position:relative;
+            top:1px;
         }
     }
 }
