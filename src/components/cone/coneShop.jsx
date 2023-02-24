@@ -10,6 +10,7 @@ import {
   TotalPriceValue,
   ExampleConeReset,
   ExamConeRemove,
+  ConeAssetsValue
 } from "../../redux/ConeAssetsReducer";
 import { useState, Fragment, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -48,7 +49,8 @@ const ConeList = [
 const Payment = () => {
   const dispatch = useDispatch();
   const [CurrentPosition, setCurrentPosition] = useState([]);
-  
+  const Cone = useSelector(ConeAssetsValue);
+  console.log(Cone);
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
       (position) => {

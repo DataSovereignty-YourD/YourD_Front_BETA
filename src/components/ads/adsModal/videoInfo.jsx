@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { StepVideoInfo } from "./addAdsStep";
-import { AddAdsModalTop } from "./detail";
+import { StepCircle } from "./addAdsStep";
+import { AddAdsModalTop, DetailAdsView } from "./detail";
 import {
   CategorySelectValue,
   Categorydatastore,
@@ -36,7 +36,6 @@ const VideoInfoBody = () => {
         setSelectList(selectedList.filter((el) => el !== itemId));
       }
       dispatch(Categorydatastore(selectedList));
-
     };
 
     return (
@@ -106,18 +105,7 @@ const VideoInfoBody = () => {
     );
   };
 
-  
 
-  const DetailAdsView = () => {
-    return (
-      <>
-        <section className="AdsViewSection">
-          <div className="AdsViewBox">Video</div>
-        </section>
-        <BackNextButton />
-      </>
-    );
-  };
 
   const Deposit =()=> {
     const dispatch = useDispatch();
@@ -167,6 +155,7 @@ const VideoInfoBody = () => {
         </section>
       </section>
       <DetailAdsView />
+      <BackNextButton/>
     </section>
   );
 };
@@ -178,8 +167,8 @@ const VideoInfo = () => {
       <div className="Background">
         <div className="Modal">
           <AddAdsModalTop />
+          <StepCircle />
           <div className="AddAds_Modal_body">
-            <StepVideoInfo />
             <VideoInfoBody />
           </div>
         </div>

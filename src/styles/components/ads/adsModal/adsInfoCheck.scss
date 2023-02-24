@@ -1,0 +1,109 @@
+@mixin SmallTitle($fs: 1.5rem) {
+    width: 100%;
+    font-size: $fs;
+    margin: 5px 0;
+}
+
+.Container {
+    .Background {
+        .Modal {
+            .AddAds_Modal_body {
+                display: flex;
+                flex-direction: row;
+                overflow: hidden;
+                width: 100%;
+                height: 530px;
+                .BodyLeft {
+                    display: flex;
+                    flex-direction: column;
+                    width: 70%;
+                    height: 100%;
+                    overflow-y: scroll;
+
+                    .BodyTitle {
+                        @include SmallTitle;
+                    }
+
+                    .CheckText {
+                        width: 100%;
+                        height: auto;
+                        min-height: 30px;
+                        padding: 10px 0;
+                        background-color: #1e1e1e;
+                        border-radius: 12px;
+                        margin-top: 5px;
+                        margin-bottom: 10px;
+                    }
+
+                    .CategoryInfoSection {
+                        display: flex;
+                        flex-wrap: wrap;
+                        flex-direction: row;
+
+                        .CategoryInfo {
+                            width: fit-content;
+                            height: auto;
+                            margin-right: 20px;
+                            padding: 10px 10px;
+                            margin-bottom: 10px;
+                            border-radius: 12px;
+                            background-color: #655D53;
+                        }
+                    }
+
+                    .adsinfo {
+                        .InfoSmallTitle {
+                            @include SmallTitle(1.2rem);
+                        }
+                    }
+
+                    .Token {
+                        display: flex;
+                        flex-direction: row;
+
+                        .InfoSmallTitle {
+                            width: 40%;
+
+                            .CheckValue {
+                                width: fit-content;
+                                min-width: 200px;
+                                height: auto;
+                                min-height: 30px;
+                                padding: 10px 20px;
+                                background-color: #1e1e1e;
+                                border-radius: 12px;
+                                margin-top: 5px;
+                                margin-bottom: 10px;
+                            }
+                        }
+                    }
+
+                    .ConeArea {
+                        .InfoSmallTitle {
+                            @include SmallTitle(1.2rem);
+                        }
+
+                        .ConeAreaMap {
+                            width: 99%;
+                            height: 500px;
+                        }
+                    }
+
+                    &::-webkit-scrollbar {
+
+                        width: 10px;
+                        height: 10px;
+                        // background-color: none;
+                        transition: all 0.25s;
+                    }
+
+                    &::-webkit-scrollbar-thumb {
+                        background-color: white;
+                        border-radius: 5px;
+                    }
+                }
+
+            }
+        }
+    }
+}

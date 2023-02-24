@@ -5,14 +5,17 @@ const initialState = {
   ExampleConeDistance: [],
   TotalCount: 0,
   TotalPrice: 0,
-  SetConePosition: [],
+  SetConeTemp: [],
+  ConePosition: [],
 };
 
 export const ConeAssetsValue = (state) => state.Cone.ConeAssets;
 export const ExampleConeDistanceValue = (state) => state.Cone.ExampleConeDistance;
 export const TotalCountValue = (state) => state.Cone.TotalCount;
 export const TotalPriceValue = (state) => state.Cone.TotalPrice;
-export const SetConePositionValue = (state)=> state.Cone.SetConePosition;
+export const SetConeTempValue = (state)=> state.Cone.SetConeTemp;
+export const ConePositionValue = (state)=> state.Cone.ConePosition;
+
 
 export const ConeAssetsSlice = createSlice({
   name: "ConeAssets",
@@ -41,13 +44,25 @@ export const ConeAssetsSlice = createSlice({
         state.TotalCount--;
         state.TotalPrice= state.TotalPrice - action.payload.Price;
     },
-    SetCone: (state, action) => {
-        state.ConeAssets.splice(action.payload.index,1);
-        state.SetConePosition.push(action.payload.D);
-    }
+    SetConeTemp: (state, action) => {
+        state.SetConeTemp.push(action.payload.D);
+    },
+    TempConeReset: (state)=> {
+      state.SetConeTemp = [];
+    },
+    ConePositionStore: (state, action)=> {
+      state.ConePosition = action.payload;
+    },
+    UseCone: (state) => {
+      state.ConeAssets = state.ConeAssets.filter(item1 => {
+        return !state.SetConeTemp.some(item2 => item1.index === item2.index);
+      })
+      state.SetConeTemp= [];
+      state.ConePosition = [];
+    },
   },
 });
 
-export const {ConeAssetsStore,ExamConeStore,ExampleConeTotal,ExampleConeReset,ExamConeRemove, SetCone} = ConeAssetsSlice.actions;
+export const {ConeAssetsStore,ExamConeStore,ExampleConeTotal,ExampleConeReset,ExamConeRemove, SetConeTemp,ConePositionStore,UseCone,TempConeReset} = ConeAssetsSlice.actions;
 
 export default ConeAssetsSlice.reducer;

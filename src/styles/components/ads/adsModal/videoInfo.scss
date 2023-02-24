@@ -72,11 +72,12 @@
             margin-bottom: 20px;
         }
         .DepositButton {
+            min-width: 120px;
             display:inline-block;
             box-shadow:inset 1px 0px 8px 4px #23395e;
             background:linear-gradient(to bottom, #2e466e 5%, #415989 100%);
             background-color:#2e466e;
-            border-radius:20px;
+            border-radius:15px;
             border:1px solid #1f2f47;
             cursor:pointer;
             color:#ffffff;

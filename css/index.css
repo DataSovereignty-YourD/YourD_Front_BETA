@@ -177,7 +177,7 @@
   align-items: center;
   flex-direction: column;
   width: 100%;
-  height: 55%;
+  height: 70%;
   font-size: 1.5rem;
   z-index: 0;
 }
@@ -191,19 +191,42 @@
   border-radius: 100%;
   z-index: 200;
   background-color: #1e1e1e;
+  margin-bottom: 100px;
+}
+.File_Upload_body .Circle:hover {
+  border: 2px solid white;
+  transition: 0.12s ease-in;
 }
 .File_Upload_body .Circle .UploadIcon {
   width: 150px;
   height: 150px;
   margin-bottom: 10px;
 }
-
-.File_Upload_Text {
-  margin-Top: 50px;
+.File_Upload_body .Circle-dragging {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border-radius: 100%;
+  z-index: 200;
+  background-color: #1e1e1e;
+  margin-bottom: 100px;
+  border: 2px solid white;
+  transition: 0.12s ease-in;
+  cursor: pointer;
+}
+.File_Upload_body .Circle-dragging .UploadIcon {
+  width: 150px;
+  height: 150px;
+  margin-bottom: 10px;
+}
+.File_Upload_body .File_Upload_Text {
   display: flex;
   position: relative;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-end;
+  justify-content: flex-end;
   text-align: center;
   font-size: 2rem;
 }
@@ -327,7 +350,7 @@
   width: 100%;
   word-break: keep-all;
 }
-.DetailBody .CategorySection .CategoryTitle {
+.DetailBody .CategorySection .SmallTitle {
   padding: 10px 0;
   font-size: 1.2rem;
 }
@@ -346,7 +369,7 @@
   text-align: center;
   white-space: nowrap;
   width: auto;
-  padding: 20px 20px;
+  padding: 15px 15px;
   margin-right: 10px;
   margin-bottom: 20px;
   background-color: #655D53;
@@ -364,7 +387,7 @@
   text-align: center;
   white-space: nowrap;
   width: auto;
-  padding: 20px 20px;
+  padding: 15px 15px;
   margin-right: 10px;
   margin-bottom: 20px;
   background-color: #1e1e1e;
@@ -373,6 +396,82 @@
 }
 .DetailBody .CategorySection .CategorySelect .CategoryBox:hover {
   color: aquamarine;
+}
+.DetailBody .TokenSection .SmallTitle {
+  padding: 10px 0;
+  font-size: 1.2rem;
+}
+.DetailBody .TokenSection .DepositInput {
+  width: 50%;
+  height: 50px;
+  font-size: 1rem;
+  background-color: #1e1e1e;
+  border-radius: 10px;
+  border: none;
+  padding: 5px 10px;
+  color: white;
+  margin-bottom: 20px;
+}
+.DetailBody .TokenSection .DepositButton {
+  display: inline-block;
+  box-shadow: inset 1px 0px 8px 4px #23395e;
+  background: linear-gradient(to bottom, #2e466e 5%, #415989 100%);
+  background-color: #2e466e;
+  border-radius: 20px;
+  border: 1px solid #1f2f47;
+  cursor: pointer;
+  color: #ffffff;
+  font-family: Verdana;
+  font: size 1.2rem;
+  padding: 14px 30px;
+  text-decoration: none;
+  text-shadow: -1px 5px 3px #263666;
+  margin-left: 30px;
+}
+.DetailBody .TokenSection .DepositButton:hover {
+  background: linear-gradient(to bottom, #415989 5%, #2e466e 100%);
+  background-color: #415989;
+}
+.DetailBody .TokenSection .DepositButton:active {
+  position: relative;
+  top: 1px;
+}
+
+.SetConeBody {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+.SetConeBody .SetConeMap {
+  display: flex;
+  justify-content: center;
+  width: 93%;
+  height: 68%;
+}
+.SetConeBody .BalanceSection {
+  display: flex;
+  flex-direction: column;
+  right: 130px;
+  top: 300px;
+  position: absolute;
+  width: auto;
+  height: auto;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+.SetConeBody .BalanceSection .BalanceBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 70px;
+  height: 30px;
+  border-radius: 20px;
+  margin: 10px 10px;
+  padding: 0 5px;
+  font-size: 0.8rem;
 }
 
 .MapBox {
@@ -471,7 +570,7 @@
   padding-top: 3%;
 }
 .Container .Background .Modal .Modal_body .ConeShop_body_Right {
-  display: flex;
+  display: block;
   flex-direction: column;
   justify-content: space-between;
   width: 18%;
@@ -479,11 +578,98 @@
   height: 100%;
   padding-left: 2%;
 }
-.Container .Background .Modal .Modal_body .ConeShop_body_Right .Cone_List {
+.Container .Background .Modal .Modal_body .ConeShop_body_Right .SelectConeSection {
+  display: flex;
+  position: absolute;
+  justify-content: space-between;
+  left: 650px;
+  top: 220px;
+  width: auto;
+  height: auto;
+  flex-direction: column;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 10px;
+  z-index: 100;
+  overflow-y: auto;
+}
+.Container .Background .Modal .Modal_body .ConeShop_body_Right .SelectConeSection .ConeListBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  width: 60px;
+  height: 30px;
+  margin: 10px 10px;
+}
+.Container .Background .Modal .Modal_body .ConeShop_body_Right .ConeListSection {
+  height: 75%;
+  overflow: hidden;
+  overflow-y: initial !important;
+  overflow: hidden;
+}
+.Container .Background .Modal .Modal_body .ConeShop_body_Right .ConeListSection .Cone_List {
   font-size: 1.5rem;
+}
+.Container .Background .Modal .Modal_body .ConeShop_body_Right .ConeListSection .SelectedCone {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 80px;
+  background-color: #1E1E1E;
+  border-radius: 10px;
+  padding: 5px 0;
+  margin: 20px 0;
+}
+.Container .Background .Modal .Modal_body .ConeShop_body_Right .ConeListSection .SelectedCone .ConeDistance {
+  margin-left: 10px;
+  padding: 10px 0;
+}
+.Container .Background .Modal .Modal_body .ConeShop_body_Right .ConeListSection .SelectedCone .ConeCountandPrice {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.Container .Background .Modal .Modal_body .ConeShop_body_Right .ConeListSection .SelectedCone .ConeCountandPrice .Remove {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 0.7rem;
+  margin-left: 5px;
+  margin-bottom: 5px;
+  width: 80px;
+  height: 30px;
+  border-radius: 10px;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  /* text-shadow: 0px 0px 10px rgba(0,0,0,0.2);*/
+  border-radius: 10px;
+  background-image: linear-gradient(to right, #fbc2eb 0%, #a6c1ee 51%, #fbc2eb 100%);
+}
+.Container .Background .Modal .Modal_body .ConeShop_body_Right .ConeListSection .SelectedCone .ConeCountandPrice .Remove:hover {
+  background-position: right center;
+}
+.Container .Background .Modal .Modal_body .ConeShop_body_Right .ConeListSection .SelectedCone .ConeCountandPrice .Price {
+  font-size: 0.9rem;
+  margin-right: 10px;
+  padding: 10px 0;
+  margin-bottom: 5px;
+}
+.Container .Background .Modal .Modal_body .ConeShop_body_Right .ConeListSection::-webkit-scrollbar {
+  width: 5px;
+  height: 10px;
+  background-color: none;
+}
+.Container .Background .Modal .Modal_body .ConeShop_body_Right .ConeListSection::-webkit-scrollbar-thumb {
+  background-color: white;
+  border-radius: 5px;
 }
 .Container .Background .Modal .Modal_body .ConeShop_body_Right .Payment_Section {
   display: flex;
+  position: relative;
   flex-direction: column;
 }
 .Container .Background .Modal .Modal_body .ConeShop_body_Right .Payment_Section .Payment {
@@ -492,9 +678,51 @@
 }
 .Container .Background .Modal .Modal_body .ConeShop_body_Right .Payment_Section .PaymentBox {
   border-radius: 1rem;
-  width: 100%;
-  height: 100px;
+  width: 200px;
+  height: auto;
   background-color: #1E1E1E;
+}
+.Container .Background .Modal .Modal_body .ConeShop_body_Right .Payment_Section .PaymentBox .TotalCount {
+  padding-top: 20px;
+  margin-left: 10px;
+  font-size: 0.9rem;
+}
+.Container .Background .Modal .Modal_body .ConeShop_body_Right .Payment_Section .PaymentBox .TotalPrice {
+  padding-bottom: 15px;
+  margin-left: 10px;
+  font-size: 0.9rem;
+}
+.Container .Background .Modal .Modal_body .ConeShop_body_Right .Payment_Section .PaymentBox .PayButton {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: auto;
+  text-decoration: none;
+  color: white;
+  border: 0;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px 0 rgb(152, 160, 180);
+  padding: 5px 0;
+  z-index: 0;
+}
+.Container .Background .Modal .Modal_body .ConeShop_body_Right .Payment_Section .PaymentBox .PayButton .fill-one {
+  position: absolute;
+  background-image: linear-gradient(to right, #E040FB, #00BCD4);
+  height: 70px;
+  width: 500px;
+  border-radius: 5px;
+  margin: -40px 0 0 -200px;
+  z-index: -1;
+  transition: all 0.4s ease;
+}
+.Container .Background .Modal .Modal_body .ConeShop_body_Right .Payment_Section .PaymentBox .PayButton:hover .fill-one {
+  -webkit-transform: translateX(100px);
+  -moz-transform: translateX(100px);
+  transform: translateX(100px);
 }
 
 html {

@@ -1,0 +1,84 @@
+.Container .Background .Modal .AddAds_Modal_body {
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+  width: 100%;
+  height: 530px;
+}
+.Container .Background .Modal .AddAds_Modal_body .BodyLeft {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  height: 100%;
+  overflow-y: scroll;
+}
+.Container .Background .Modal .AddAds_Modal_body .BodyLeft .BodyTitle {
+  width: 100%;
+  font-size: 1.5rem;
+  margin: 5px 0;
+}
+.Container .Background .Modal .AddAds_Modal_body .BodyLeft .CheckText {
+  width: 100%;
+  height: auto;
+  min-height: 30px;
+  padding: 10px 0;
+  background-color: #1e1e1e;
+  border-radius: 12px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+.Container .Background .Modal .AddAds_Modal_body .BodyLeft .CategoryInfoSection {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+.Container .Background .Modal .AddAds_Modal_body .BodyLeft .CategoryInfoSection .CategoryInfo {
+  width: fit-content;
+  height: auto;
+  margin-right: 20px;
+  padding: 10px 10px;
+  margin-bottom: 10px;
+  border-radius: 12px;
+  background-color: #655D53;
+}
+.Container .Background .Modal .AddAds_Modal_body .BodyLeft .adsinfo .InfoSmallTitle {
+  width: 100%;
+  font-size: 1.2rem;
+  margin: 5px 0;
+}
+.Container .Background .Modal .AddAds_Modal_body .BodyLeft .Token {
+  display: flex;
+  flex-direction: row;
+}
+.Container .Background .Modal .AddAds_Modal_body .BodyLeft .Token .InfoSmallTitle {
+  width: 40%;
+}
+.Container .Background .Modal .AddAds_Modal_body .BodyLeft .Token .InfoSmallTitle .CheckValue {
+  width: fit-content;
+  min-width: 200px;
+  height: auto;
+  min-height: 30px;
+  padding: 10px 20px;
+  background-color: #1e1e1e;
+  border-radius: 12px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+.Container .Background .Modal .AddAds_Modal_body .BodyLeft .ConeArea .InfoSmallTitle {
+  width: 100%;
+  font-size: 1.2rem;
+  margin: 5px 0;
+}
+.Container .Background .Modal .AddAds_Modal_body .BodyLeft .ConeArea .ConeAreaMap {
+  width: 99%;
+  height: 500px;
+}
+.Container .Background .Modal .AddAds_Modal_body .BodyLeft::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+  transition: all 0.25s;
+}
+.Container .Background .Modal .AddAds_Modal_body .BodyLeft::-webkit-scrollbar-thumb {
+  background-color: white;
+  border-radius: 5px;
+}/*# sourceMappingURL=adsInfoCheck.css.map */

@@ -53,9 +53,7 @@ const ExamMap = () => {
     }, [ExamConeDistance]);
 
     const handleMarkerDragEnd = (index, event) => {
-      console.log(event.latLng)
       if(event.latLng != null ) {
-        console.log("asldk;fjalks;dfjaklsdf");
         const { lat, lng } = event.latLng;
         const positions = [...markerPositions];
         positions[index] = { lat: lat(), lng: lng() };

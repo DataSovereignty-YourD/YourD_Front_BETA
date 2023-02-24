@@ -1,6 +1,10 @@
-// import InitMap from "../../map";
-import { GoogleMap, useLoadScript, Marker ,Circle} from "@react-google-maps/api";
-import {  useState, useEffect } from "react";
+import {
+  GoogleMap,
+  useLoadScript,
+  Marker,
+  Circle,
+} from "@react-google-maps/api";
+import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import D100Cone from "../../assets/D100Cone.svg";
 import D200Cone from "../../assets/D200Cone.svg";
@@ -11,9 +15,12 @@ import D5000Cone from "../../assets/D5000Cone.svg";
 import D10000Cone from "../../assets/D10000Cone.svg";
 import D20000Cone from "../../assets/D20000Cone.svg";
 import D50000Cone from "../../assets/D50000Cone.svg";
-import { Cone, ConePosition } from "../../redux/AdsUploadReducer";
+import {
+  ConePositionValue,
+  SetConeTempValue,
+} from "../../redux/ConeAssetsReducer";
 
-function ConeMap() {
+function CheckConeMap() {
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAP_API,
   });
@@ -31,24 +38,28 @@ function ConeMap() {
 
   if (!isLoaded) return <div>Loading...</div>;
 
-  return <ExampleMap currentPosition={currentPosition} />;
+  return <Map currentPosition={currentPosition} />;
 }
 
-const AdsCone = (SettingCone,SettingConePosition) => {
+const CheckCone = () => {
+  const TempPosition = useSelector(ConePositionValue);
+  const basket = useSelector(SetConeTempValue);
   let markers = [];
-  SettingCone[0].forEach((distance, index) => {
+
+  
+  basket.forEach((distance, index) => {
     let marker;
     switch (distance.distance) {
       case "100m":
         marker = (
           <Marker
             key={index}
-            position={SettingConePosition[0][index]}
+            position={TempPosition[index]}
             icon={D100Cone}
             draggable={false}
           >
             <Circle
-              center={SettingConePosition[0][index]}
+              center={TempPosition[index]}
               radius={100}
               strokeOpacity={0.8}
               strokeWeight={2}
@@ -61,12 +72,12 @@ const AdsCone = (SettingCone,SettingConePosition) => {
         marker = (
           <Marker
             key={index}
-            position={SettingConePosition[0][index]}
+            position={TempPosition[index]}
             icon={D200Cone}
             draggable={false}
           >
             <Circle
-              center={SettingConePosition[0][index]}
+              center={TempPosition[index]}
               radius={200}
               strokeOpacity={0.8}
               strokeWeight={2}
@@ -79,12 +90,12 @@ const AdsCone = (SettingCone,SettingConePosition) => {
         marker = (
           <Marker
             key={index}
-            position={SettingConePosition[0][index]}
+            position={TempPosition[index]}
             icon={D500Cone}
             draggable={false}
           >
             <Circle
-              center={SettingConePosition[0][index]}
+              center={TempPosition[index]}
               radius={500}
               strokeOpacity={0.8}
               strokeWeight={2}
@@ -97,12 +108,12 @@ const AdsCone = (SettingCone,SettingConePosition) => {
         marker = (
           <Marker
             key={index}
-            position={SettingConePosition[0][index]}
+            position={TempPosition[index]}
             icon={D1000Cone}
             draggable={false}
           >
             <Circle
-              center={SettingConePosition[0][index]}
+              center={TempPosition[index]}
               radius={1000}
               strokeOpacity={0.8}
               strokeWeight={2}
@@ -115,12 +126,12 @@ const AdsCone = (SettingCone,SettingConePosition) => {
         marker = (
           <Marker
             key={index}
-            position={SettingConePosition[0][index]}
+            position={TempPosition[index]}
             icon={D2000Cone}
             draggable={false}
           >
             <Circle
-              center={SettingConePosition[0][index]}
+              center={TempPosition[index]}
               radius={2000}
               strokeOpacity={0.8}
               strokeWeight={2}
@@ -133,12 +144,12 @@ const AdsCone = (SettingCone,SettingConePosition) => {
         marker = (
           <Marker
             key={index}
-            position={SettingConePosition[0][index]}
+            position={TempPosition[index]}
             icon={D5000Cone}
             draggable={false}
           >
             <Circle
-              center={SettingConePosition[0][index]}
+              center={TempPosition[index]}
               radius={5000}
               strokeOpacity={0.8}
               strokeWeight={2}
@@ -151,12 +162,12 @@ const AdsCone = (SettingCone,SettingConePosition) => {
         marker = (
           <Marker
             key={index}
-            position={SettingConePosition[0][index]}
+            position={TempPosition[index]}
             icon={D10000Cone}
             draggable={false}
           >
             <Circle
-              center={SettingConePosition[0][index]}
+              center={TempPosition[index]}
               radius={10000}
               strokeOpacity={0.8}
               strokeWeight={2}
@@ -169,12 +180,12 @@ const AdsCone = (SettingCone,SettingConePosition) => {
         marker = (
           <Marker
             key={index}
-            position={SettingConePosition[0][index]}
+            position={TempPosition[index]}
             icon={D20000Cone}
             draggable={false}
           >
             <Circle
-              center={SettingConePosition[0][index]}
+              center={TempPosition[index]}
               radius={20000}
               strokeOpacity={0.8}
               strokeWeight={2}
@@ -187,12 +198,12 @@ const AdsCone = (SettingCone,SettingConePosition) => {
         marker = (
           <Marker
             key={index}
-            position={SettingConePosition[0][index]}
+            position={TempPosition[index]}
             icon={D50000Cone}
             draggable={false}
           >
             <Circle
-              center={SettingConePosition[0][index]}
+              center={TempPosition[index]}
               radius={50000}
               strokeOpacity={0.8}
               strokeWeight={2}
@@ -209,16 +220,16 @@ const AdsCone = (SettingCone,SettingConePosition) => {
   return markers;
 };
 
-const ExampleMap = ({ currentPosition  }) => {
-  const SettingConePosition = useSelector(ConePosition);
-  const SettingCone = useSelector(Cone);
-  const center = currentPosition;
-  const exist = (SettingCone.length !== 0);
+export const Map = ({ currentPosition }) => {
   return (
-    <GoogleMap zoom={15} center={center} mapContainerClassName="map-container1">
-      {exist && AdsCone(SettingCone,SettingConePosition)}
+    <GoogleMap
+      zoom={15}
+      center={currentPosition}
+      mapContainerClassName="map-container1"
+    >
+      {CheckCone()}
     </GoogleMap>
   );
 };
 
-export default ConeMap;
+export default CheckConeMap;

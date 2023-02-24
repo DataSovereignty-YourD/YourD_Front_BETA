@@ -32,6 +32,7 @@
   background-color: #282828;
   box-shadow: 1px 1px 1px 1px gray;
   padding: 1rem;
+  overflow: hidden;
 }
 .Container .Background .Modal .ModalTop {
   display: flex;
@@ -123,7 +124,6 @@
   height: 75%;
   overflow: hidden;
   overflow-y: initial !important;
-  overflow: hidden;
 }
 .Container .Background .Modal .Modal_body .ConeShop_body_Right .ConeListSection .Cone_List {
   font-size: 1.5rem;

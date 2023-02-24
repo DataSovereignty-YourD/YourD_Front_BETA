@@ -1,7 +1,7 @@
 import { GoogleMap, useLoadScript, Marker, Circle } from "@react-google-maps/api";
 import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-import {   SetConePositionValue } from "../../redux/ConeAssetsReducer";
+import { useDispatch, useSelector } from "react-redux";
+import {   SetConeTempValue,ConePositionStore ,ConePositionValue} from "../../redux/ConeAssetsReducer";
 import D100Cone from "../../assets/D100Cone.svg";
 import D200Cone from "../../assets/D200Cone.svg";
 import D500Cone from "../../assets/D500Cone.svg";
@@ -12,7 +12,7 @@ import D10000Cone from "../../assets/D10000Cone.svg";
 import D20000Cone from "../../assets/D20000Cone.svg";
 import D50000Cone from "../../assets/D50000Cone.svg";
 
-function SetConeMap() {
+export function SetConeMap() {
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAP_API,
   });
@@ -34,10 +34,12 @@ function SetConeMap() {
 }
 
 const ConeView = (currentPosition) => {
-    const [markerPositions, setMarkerPositions] = useState([]);
-    let markers =[];
-    const basket = useSelector(SetConePositionValue);
-    useEffect(() => {
+  const dispatch = useDispatch();
+  const TempPosition = useSelector(ConePositionValue);
+  const [markerPositions, setMarkerPositions] = useState([...TempPosition]);
+  const basket = useSelector(SetConeTempValue);
+  let markers =[];
+  useEffect(() => {
         let positions = [];
         if (basket[0] !== undefined && currentPosition !== null) {
           if (markerPositions[0] === undefined) {
@@ -48,17 +50,18 @@ const ConeView = (currentPosition) => {
             positions[positions.length] = currentPosition;
             console.log(positions);
             setMarkerPositions(positions);
+            dispatch(ConePositionStore(positions));
           }
         }
       }, [basket]);
 
-      const handleMarkerDragEnd = (index, event) => {
-        console.log(event.latLng)
+      const handleMarkerDragEnd = (index, event, distance) => {
         if(event.latLng != null ) {
           const { lat, lng } = event.latLng;
           const positions = [...markerPositions];
-          positions[index] = { lat: lat(), lng: lng() };
+          positions[index] = { lat: lat(), lng: lng(), D: distance };
           setMarkerPositions(positions);
+          dispatch(ConePositionStore(positions));
         }
       };
 
@@ -73,7 +76,7 @@ const ConeView = (currentPosition) => {
                   position={markerPositions[index]}
                   icon={D100Cone}
                   draggable={true}
-                  onDragEnd={(event) => handleMarkerDragEnd(index, event)}
+                  onDragEnd={(event) => handleMarkerDragEnd(index, event, distance.distance)}
                 >
                   <Circle
                     center={markerPositions[index]}
@@ -92,7 +95,7 @@ const ConeView = (currentPosition) => {
                   position={markerPositions[index]}
                   icon={D200Cone}
                   draggable={true}
-                  onDragEnd={(event) => handleMarkerDragEnd(index, event)}
+                  onDragEnd={(event) => handleMarkerDragEnd(index, event, distance.distance)}
                 >
                   <Circle
                     center={markerPositions[index]}
@@ -111,7 +114,7 @@ const ConeView = (currentPosition) => {
                   position={markerPositions[index]}
                   icon={D500Cone}
                   draggable={true}
-                  onDragEnd={(event) => handleMarkerDragEnd(index, event)}
+                  onDragEnd={(event) => handleMarkerDragEnd(index, event, distance.distance)}
                 >
                   <Circle
                     center={markerPositions[index]}
@@ -130,7 +133,7 @@ const ConeView = (currentPosition) => {
                   position={markerPositions[index]}
                   icon={D1000Cone}
                   draggable={true}
-                  onDragEnd={(event) => handleMarkerDragEnd(index, event)}
+                  onDragEnd={(event) => handleMarkerDragEnd(index, event, distance.distance)}
                 >
                   <Circle
                     center={markerPositions[index]}
@@ -149,7 +152,7 @@ const ConeView = (currentPosition) => {
                   position={markerPositions[index]}
                   icon={D2000Cone}
                   draggable={true}
-                  onDragEnd={(event) => handleMarkerDragEnd(index, event)}
+                  onDragEnd={(event) => handleMarkerDragEnd(index, event, distance.distance)}
                 >
                   <Circle
                     center={markerPositions[index]}
@@ -168,7 +171,7 @@ const ConeView = (currentPosition) => {
                   position={markerPositions[index]}
                   icon={D5000Cone}
                   draggable={true}
-                  onDragEnd={(event) => handleMarkerDragEnd(index, event)}
+                  onDragEnd={(event) => handleMarkerDragEnd(index, event, distance.distance)}
                 >
                   <Circle
                     center={markerPositions[index]}
@@ -187,7 +190,7 @@ const ConeView = (currentPosition) => {
                   position={markerPositions[index]}
                   icon={D10000Cone}
                   draggable={true}
-                  onDragEnd={(event) => handleMarkerDragEnd(index, event)}
+                  onDragEnd={(event) => handleMarkerDragEnd(index, event, distance.distance)}
                 >
                   <Circle
                     center={markerPositions[index]}
@@ -206,7 +209,7 @@ const ConeView = (currentPosition) => {
                   position={markerPositions[index]}
                   icon={D20000Cone}
                   draggable={true}
-                  onDragEnd={(event) => handleMarkerDragEnd(index, event)}
+                  onDragEnd={(event) => handleMarkerDragEnd(index, event, distance.distance)}
                 >
                   <Circle
                     center={markerPositions[index]}
@@ -225,7 +228,7 @@ const ConeView = (currentPosition) => {
                   position={markerPositions[index]}
                   icon={D50000Cone}
                   draggable={true}
-                  onDragEnd={(event) => handleMarkerDragEnd(index, event)}
+                  onDragEnd={(event) => handleMarkerDragEnd(index, event, distance.distance)}
                 >
                   <Circle
                     center={markerPositions[index]}

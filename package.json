@@ -47,6 +47,8 @@
   },
   "compilerOtions": {
     "baseUrl": "./src"
+  },
+  "devDependencies": {
+    "react-error-overlay": "6.0.9"
   }
-
 }
