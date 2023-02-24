@@ -46,7 +46,6 @@ const ExamMap = () => {
         } else {
           positions = [...markerPositions];
           positions[positions.length] = currentPosition;
-          console.log(positions);
           setMarkerPositions(positions);
         }
       }

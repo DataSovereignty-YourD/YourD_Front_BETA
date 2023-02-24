@@ -48,7 +48,6 @@ const ConeView = (currentPosition) => {
           } else {
             positions = [...markerPositions];
             positions[positions.length] = currentPosition;
-            console.log(positions);
             setMarkerPositions(positions);
             dispatch(ConePositionStore(positions));
           }

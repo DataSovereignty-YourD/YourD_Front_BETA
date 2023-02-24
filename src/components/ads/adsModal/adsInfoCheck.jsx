@@ -21,7 +21,6 @@ const BackNextButton = () => {
     const Upload = () => {
       const Position = useSelector(ConePositionValue);
       const basket = useSelector(SetConeTempValue);
-      console.log(Position,basket);
 
       const Save =()=> {
         dispatch(AdsUpload([Position,basket]));
@@ -50,7 +49,6 @@ const AdsInfo = () => {
   const CategoryValue = useSelector(CategorySelectValue);
   const DepositToken = useSelector(TokenDepositValue);
   const RewardToken = useSelector(AdsRewardValue);
-  console.log(CategoryValue);
   const Category = () => {
     return(
       CategoryValue.map((index)=> {

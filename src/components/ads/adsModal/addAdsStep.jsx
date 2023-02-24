@@ -45,7 +45,6 @@ export const StepCircle = () => {
   }
 
   const SetCone = () => {
-    console.log(Position[0]);
     switch (location.pathname) {
       case "/SetCone": return <ColorCircle/>
       case "/Check": if (Position[0] === undefined) return <WarningCircle/>

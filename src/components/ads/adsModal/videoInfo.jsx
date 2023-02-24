@@ -76,7 +76,6 @@ const VideoInfoBody = () => {
         <div className="ModalSmallButton" onClick={() => {
           dispatch(Categorydatastore(selectedList));
           navigate(-1);
-          console.log(SelectValue);
           }}>
           Back
         </div>
@@ -110,7 +109,6 @@ const VideoInfoBody = () => {
   const Deposit =()=> {
     const dispatch = useDispatch();
     const DepositTokenValue = useSelector(TokenDepositValue);
-    console.log(DepositTokenValue);
     const TokenValuehandler =()=> {
       const TokenValue = document.getElementById("DepositValue");
       dispatch(DepositValue(TokenValue.value));

@@ -50,7 +50,6 @@ const Payment = () => {
   const dispatch = useDispatch();
   const [CurrentPosition, setCurrentPosition] = useState([]);
   const Cone = useSelector(ConeAssetsValue);
-  console.log(Cone);
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
       (position) => {
@@ -66,7 +65,6 @@ const Payment = () => {
     
     const List2 = (distance, color, Price) => {
       if (CurrentPosition !== null) {
-        console.log("sipal");
         dispatch(ExamConeStore({ distance, color, Price, index }));
         dispatch(ExampleConeTotal(Price));
         index++;
