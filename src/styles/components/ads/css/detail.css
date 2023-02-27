@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: row;
   padding: 0 2%;
+  width: 100%;
   height: 70%;
 }
 .Container .Background .Modal .AddAds_Modal_body .DetailBody .DetailInput {
@@ -10,7 +11,7 @@
   width: 70%;
 }
 .Container .Background .Modal .AddAds_Modal_body .DetailBody .DetailInput .DetailBodyTitle {
-  width: 100%;
+  width: 50%;
   font-size: 1.5rem;
 }
 .Container .Background .Modal .AddAds_Modal_body .DetailBody .DetailInput .AdsDetailTitleBox {
@@ -63,6 +64,7 @@
   align-items: center;
   border-radius: 10px;
   background-color: #1e1e1e;
+  width: 100%;
 }
 .Container .Background .Modal .AddAds_Modal_body .AdsViewSection .AdsViewBox .Preview-text {
   padding: 10px 0;

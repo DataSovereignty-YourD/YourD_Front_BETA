@@ -1,11 +1,19 @@
 import { Icon } from "@iconify/react";
-import { Link, useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Account, AccountStore } from "../../redux/AccountReducer";
+import CheckAccount from "./checkAccount";
+
+
 
 
 const TopBar = () => {
   document.body.style = `overflow-y: scroll;`;
+  let storedaccount = useSelector(Account);
+  const [account,setAccount] = useState(storedaccount);
+  const navigate = useNavigate();
   const location = useLocation();
-  
   const MenuButton = () => {
     return (
       <div className="menu">
@@ -34,6 +42,35 @@ const TopBar = () => {
       </div>
     );
   };
+  useEffect(()=> {
+
+  },)
+
+  function ConnectWallet() {
+    const dispatch = useDispatch();
+    
+    const Connect = async () => {
+      if(window.ethereum) {
+        try {
+          const acc = await window.ethereum.request({
+            method: "eth_requestAccounts",
+          });
+          dispatch(AccountStore(acc));
+          setAccount(acc);
+        } catch (error){
+          console.log("Error Connecting");
+        }
+      } else {
+        alert("MetaMask not detected");
+      }
+    }
+    return (
+      <button onClick={()=>Connect()} className="ConnectWallet">
+        <span className="material-icons" style={{marginRight: "10px"}}> account_balance_wallet </span>
+        {account ? <div>{account.toString().slice(0,6)+"..."+account.toString().slice(-6)}</div> : <div>Connect Wallet</div>}
+      </button>
+    );
+  }
 
   return (
     <div className="TopBar">
@@ -42,12 +79,21 @@ const TopBar = () => {
         <div className="Logo">D-AD</div>
       </section>
       <section className="Button_sction">
-        <Link to="/ConeShopModal" state={{ background: location }}>
+        <div onClick={() => {
+          if(account !== "") {
+            navigate("/ConeShopModal", {state: {background: location}});
+          } else  alert("Connect Wallet");
+        }}>
           <ConeShopModal />
-        </Link>
-        <Link to="/AdsUploadModal" state={{ background: location }}>
+        </div>
+        <div onClick={() => {
+          if(account !== "") {
+            navigate("/AdsUploadModal", {state: {background: location}});
+        } else  alert("Connect Wallet");
+        }}>
           <AddAds />
-        </Link>
+        </div>
+        {ConnectWallet()}
       </section>
     </div>
   );

@@ -6,13 +6,14 @@
                     display: flex;
                     flex-direction: row;
                     padding: 0 2%;
+                    width: 100%;
                     height: 70%;
                     .DetailInput {
                         display: flex;
                         flex-direction: column;
                         width: 70%;
                         .DetailBodyTitle {
-                            width: 100%;
+                            width: 50%;
                             font-size: 1.5rem;
                         }
                         .AdsDetailTitleBox{
@@ -66,6 +67,8 @@
                         align-items: center;
                         border-radius: 10px;
                         background-color: #1e1e1e;
+                        width: 100%;
+                        
                         .Preview-text{
                             padding: 10px 0;
                         }

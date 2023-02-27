@@ -38,8 +38,9 @@
   right: 0;
   margin-right: 3rem;
   flex-direction: row;
+  align-items: center;
 }
-.TopBar .Button {
+.TopBar .Button_sction .Button {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -50,6 +51,23 @@
   margin-right: 0.5rem;
   background-color: black;
 }
-.TopBar .Button:hover {
+.TopBar .Button_sction .Button:hover {
   background-color: #292D32;
+}
+.TopBar .Button_sction .ConnectWallet {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+  width: 180px;
+  height: 36px;
+  border: none;
+  background-color: #292D32;
+  font-size: 0.8rem;
+  color: white;
+  transition: all 0.5s;
+}
+.TopBar .Button_sction .ConnectWallet:hover {
+  background-color: #4169E1;
+  transform: scale(1.05);
 }/*# sourceMappingURL=topbar.css.map */

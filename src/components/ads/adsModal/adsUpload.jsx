@@ -2,8 +2,12 @@ import { Icon } from "@iconify/react";
 import { ReactComponent as UploadIcon } from "../../../assets/UploadIcon.svg";
 import {Link,useLocation, useNavigate } from 'react-router-dom';
 import { useCallback, useEffect, useRef, useState } from "react";
-import { useDispatch } from "react-redux";
-import { fileUpload } from "../../../redux/AdsUploadReducer";
+import { useDispatch, useSelector } from "react-redux";
+import { fileTitleStore, fileUpload } from "../../../redux/AdsUploadReducer";
+import { Account, AdsCidStore } from "../../../redux/AccountReducer";
+import axios from "axios";
+// import { useStorageUpload } from "@thirdweb-dev/react";
+
 export const Top = () => {
   return (
     <div className="ModalTop">
@@ -15,14 +19,23 @@ export const Top = () => {
   );
 }
 
+export const Loading =() => {
+  return(
+    <div className="loading"/>
+  )
+}
+
 export const AdsUpload = () => {
   document.body.style = `overflow-y: hidden;`;
+  // const { mutateAsync: upload } = useStorageUpload();
+  const account = useSelector(Account);
   const navigate = useNavigate();
   const location = useLocation();
   const dragRef = useRef();
   const dispatch = useDispatch();
   // add state to keep track of whether the file is being dragged over the upload area
   const [isDragging, setIsDragging] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleDragEnter =  useCallback((event) => {
     event.preventDefault();
@@ -47,7 +60,6 @@ export const AdsUpload = () => {
     setIsDragging(false);
     const file = event.dataTransfer.files[0];
     dispatch(fileUpload(file));
-    navigate("/Detail", { state: { background: location } });
   },[]);
 
   const initDragEvents = useCallback(() => {
@@ -72,10 +84,48 @@ export const AdsUpload = () => {
     initDragEvents();
   }, [initDragEvents]);
 
-  const inputfile = (e) => {
+ 
+  const inputfile = async (e) => {
+    setLoading(true);
     let file = e.target.files[0];
-    dispatch(fileUpload(file));
-    navigate("/Detail", { state: { background: location } });
+    const Title = file.name.split(".")[0];
+    dispatch(fileTitleStore(Title));
+    const formData = new FormData();
+    formData.append("file",file);
+    const metadata = JSON.stringify({
+      name: account,
+      Title: Title,
+      keyvalues: {
+        exampleKey: 'exampleValue'
+      }
+    })
+    formData.append("pinataMetadata", metadata);
+    const options = JSON.stringify({
+      cidVersion: 0,
+    })
+    formData.append('pinataOptions', options);
+
+    //preview image url저장
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      const base64 = reader.result.toString();
+      dispatch(fileUpload(base64));
+    }
+
+    // Authorization: `${process.env.REACT_APP_PINATA_API_JWT}`,
+    if (file) {
+      try{
+        const result = await axios.post("http://localhost:3001/adsfile",formData);
+        console.log(result);
+        navigate("/Detail", { state: { background: location } });
+
+            // dispatch(AdsCidStore(result.data.IpfsHash));
+      } catch (error) {
+        console.log(error);
+        navigate(-1);
+      }
+    }
   }
   
   return (
@@ -83,7 +133,8 @@ export const AdsUpload = () => {
       <div className="Background">
         <div className="Modal">
           <Top />
-          <label className="File_Upload_body" ref={dragRef}>
+          {loading?<Loading/>:
+          (<label className="File_Upload_body" ref={dragRef}>
             <input
               type="file"
               id="fileUpload"
@@ -94,7 +145,7 @@ export const AdsUpload = () => {
               <UploadIcon className="UploadIcon" />
             </label>
             <div className="File_Upload_Text">Drag & Drop a File Here</div>
-          </label>
+          </label>)}
         </div>
       </div>
     </div>

@@ -2,26 +2,24 @@ import { Icon } from "@iconify/react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { fileInfo, detailinfo, infoValue } from "../../../redux/AdsUploadReducer";
+import { fileInfo, detailinfo, infoValue, ModalCloseAction, fileTitle } from "../../../redux/AdsUploadReducer";
 import { TempConeReset } from "../../../redux/ConeAssetsReducer";
 import { StepCircle } from "./addAdsStep";
 
 export const AddAdsModalTop = () => {
   
-  const adsfile = useSelector(fileInfo);
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const fullTitle = [adsfile.name];
-    const title = fullTitle.toString().split(".");
-
+    const title = useSelector(fileTitle);
     const ModalClose =()=> {
       dispatch(TempConeReset());
+      dispatch(ModalCloseAction());
       navigate("/");
     }
 
     return (
       <div className="ModalTop">
-        <div className="ModalTitle">{title[0]}</div>
+        <div className="ModalTitle">{title}</div>
         <div onClick={ModalClose} className="CloseButton">
           <Icon icon="mingcute:close-fill" color="white" width="30" />
         </div>
@@ -67,42 +65,28 @@ const DetailBody = () => {
   )
 }
 
+
 export const DetailAdsView = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const adsfile = useSelector(fileInfo);
-  useEffect(()=> {
-    if (Array.isArray(adsfile)) {
-      navigate("/AdsUploadModal", { state: { background: location } });
-    }
-  },[])
+  
+  // useEffect(()=> {
+  //   if (adsfile.toString().length === 0) {
+  //     navigate("/AdsUploadModal", { state: { background: location } });
+  //   }
+  // },)
 
-  const blobfile = new Blob([adsfile], {type: adsfile.type});
-  const [file, setFile] = useState(null);
 
-  useEffect(() => {
-    const reader = new FileReader();
-    reader.readAsDataURL(blobfile);
-    reader.onload = () => {
-      const fileContent = reader.result;
-      if(blobfile.type.includes("image")){
-        setFile(<img src={fileContent}
-          alt="preview"
-          style={{ maxWidth: "100%", maxHeight: "100%" }}
-        />)}
-      else if (blobfile.type.includes("video")){
-          setFile(
-            <video src={fileContent} style={{ maxWidth: "100%" }} />
-          )
-        }
-    };
-  }, []);
+  function Base64Image(adsfile) {
+    return <img src={adsfile} alt="image" style={{width: "250px", height:"auto", borderRadius: "12px"}}/>
+  }
 
   return (
       <section className="AdsViewSection">
         <div className="AdsViewBox">
           <div className="Preview-text">Preview</div>
-          <div className="Preview">{file}</div>
+          <div className="Preview">{(adsfile)? Base64Image(adsfile): <div>error</div>}</div>
         </div>
       </section>
   );

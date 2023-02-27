@@ -1,10 +1,12 @@
 import { AddAdsModalTop, DetailAdsView } from "./detail";
 import { useNavigate } from "react-router-dom";
 import { UseCone,ConePositionValue, SetConeTempValue } from "../../../redux/ConeAssetsReducer";
-import { AdsUpload, CategorySelectValue, infoValue,TokenDepositValue,AdsRewardValue } from "../../../redux/AdsUploadReducer";
+import { AdsUpload, CategorySelectValue, infoValue,TokenDepositValue,AdsRewardValue, fileInfo } from "../../../redux/AdsUploadReducer";
 import { useDispatch,useSelector } from "react-redux";
 import { StepCircle } from "./addAdsStep";
-import CheckConeMap from "../../map/CheckConeMap";
+import CheckConeMap from "../../map/checkConeMap";
+import axios from "axios";
+import { Account, AdsCid } from "../../../redux/AccountReducer";
 
 const BackNextButton = () => {
   const navigate = useNavigate();
@@ -21,8 +23,28 @@ const BackNextButton = () => {
     const Upload = () => {
       const Position = useSelector(ConePositionValue);
       const basket = useSelector(SetConeTempValue);
-
-      const Save =()=> {
+      const detailData = useSelector(infoValue);
+      const CategoryValue = useSelector(CategorySelectValue);
+      const DepositToken = useSelector(TokenDepositValue);
+      const RewardToken = useSelector(AdsRewardValue);
+      const account = useSelector(Account);
+      const Cid = useSelector(AdsCid);
+      console.log(Cid);
+      const uploadData = {
+        User: account,
+        Title: detailData[0].title,
+        Description: detailData[0].description,
+        Category: CategoryValue,
+        DepositToken: DepositToken,
+        RpP: RewardToken,
+        Position: Position,
+        AdsCid: Cid
+      };
+      const Save =async()=> {
+        const result = await axios.post('http://localhost:3001/', {
+          Data: uploadData,
+        });
+        console.log(result);
         dispatch(AdsUpload([Position,basket]));
         dispatch(UseCone());
         navigate("/");
