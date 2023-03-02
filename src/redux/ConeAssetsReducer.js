@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-
+import axios from "axios";
+import { act } from "react-dom/test-utils";
 const initialState = {
   ConeAssets: [],
   ExampleConeDistance: [],
@@ -21,11 +22,21 @@ export const ConeAssetsSlice = createSlice({
   name: "ConeAssets",
   initialState,
   reducers: {
-    ConeAssetsStore: (state) => {
+    ReadDBAsset: (state,action)=> {
+      // const asset = action.payload;
+      // asset.map((index)=> {
+      //   if (index.length !== 0) {
+      //     state.ConeAssets.push(action.payload);}
+      // })
+      state.ConeAssets =state.ConeAssets.concat(action.payload);
+      
+    },
+    ConeAssetsStore: (state,action) => {
       state.ConeAssets =state.ConeAssets.concat(state.ExampleConeDistance);
       state.ExampleConeDistance= [];
       state.TotalCount=0;
       state.TotalPrice=0;
+      axios.post('http://localhost:3001/ConeUpdate', {Asset: state.ConeAssets,Account: action.payload});
     },
     ExamConeStore: (state, action) => {
       state.ExampleConeDistance.push(action.payload);
@@ -53,16 +64,17 @@ export const ConeAssetsSlice = createSlice({
     ConePositionStore: (state, action)=> {
       state.ConePosition = action.payload;
     },
-    UseCone: (state) => {
+    UseCone: (state,action) => {
       state.ConeAssets = state.ConeAssets.filter(item1 => {
         return !state.SetConeTemp.some(item2 => item1.index === item2.index);
       })
+      axios.post('http://localhost:3001/ConeUpdate', {Asset: state.ConeAssets,Account: action.payload});
       state.SetConeTemp= [];
       state.ConePosition = [];
     },
   },
 });
 
-export const {ConeAssetsStore,ExamConeStore,ExampleConeTotal,ExampleConeReset,ExamConeRemove, SetConeTemp,ConePositionStore,UseCone,TempConeReset} = ConeAssetsSlice.actions;
+export const {ConeAssetsStore,ExamConeStore,ExampleConeTotal,ExampleConeReset,ExamConeRemove, SetConeTemp,ConePositionStore,UseCone,TempConeReset,ReadDBAsset} = ConeAssetsSlice.actions;
 
 export default ConeAssetsSlice.reducer;

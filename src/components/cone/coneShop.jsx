@@ -15,10 +15,13 @@ import {
 import { useState, Fragment, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import ExamMap from "../map/coneShopMap";
+import axios from "axios";
+import { Account } from "../../redux/AccountReducer";
 
 const Top = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   return (
     <div className="ModalTop">
       <div className="ModalTitle">ConeShop</div>
@@ -129,13 +132,14 @@ const Payment = () => {
   const Total = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-
+    const currentAccount = useSelector(Account);
     const TotalCount = useSelector(TotalCountValue);
     const TotalPrice = useSelector(TotalPriceValue);
 
     function BalanceUpdate() {
-      dispatch(ConeAssetsStore());
+      dispatch(ConeAssetsStore(currentAccount));
       navigate("/");
+      
     }
     return (
       <div className="PaymentBox">

@@ -8,7 +8,7 @@ const UserAdsSchema = new mongoose.Schema({
   DepositToken: { type: Number, require: true },
   RpP: { type: Number, require: true },
   Position: {type: Object, require: true},
-  AdsCid: {type: Array, require: true},
+  AdsCid: {type: Array, require: false},
 });
 
 const UserAdsModel = mongoose.model('UserModel', UserAdsSchema)

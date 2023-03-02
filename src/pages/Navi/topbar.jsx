@@ -1,9 +1,10 @@
 import { Icon } from "@iconify/react";
-import { useEffect, useState } from "react";
+import axios from "axios";
+import {  useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import {  useLocation, useNavigate } from "react-router-dom";
 import { Account, AccountStore } from "../../redux/AccountReducer";
-import CheckAccount from "./checkAccount";
+import {  ReadDBAsset } from "../../redux/ConeAssetsReducer";
 
 
 
@@ -14,6 +15,12 @@ const TopBar = () => {
   const [account,setAccount] = useState(storedaccount);
   const navigate = useNavigate();
   const location = useLocation();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    console.log("rerender");
+  }, [account]);
+
   const MenuButton = () => {
     return (
       <div className="menu">
@@ -42,13 +49,13 @@ const TopBar = () => {
       </div>
     );
   };
-  useEffect(()=> {
 
-  },)
-
+  async function getdbAsset(acc) {
+    const Asset = await axios.post("http://localhost:3001/getasset",acc)
+    dispatch(ReadDBAsset(Asset.data));
+  }
+  
   function ConnectWallet() {
-    const dispatch = useDispatch();
-    
     const Connect = async () => {
       if(window.ethereum) {
         try {
@@ -57,6 +64,7 @@ const TopBar = () => {
           });
           dispatch(AccountStore(acc));
           setAccount(acc);
+          getdbAsset(acc);
         } catch (error){
           console.log("Error Connecting");
         }
@@ -86,9 +94,11 @@ const TopBar = () => {
         }}>
           <ConeShopModal />
         </div>
-        <div onClick={() => {
+        <div onClick={async() => {
           if(account !== "") {
-            navigate("/AdsUploadModal", {state: {background: location}});
+            const AdsInfo = await axios.post("http://localhost:3001/loadAdsInfo", account);
+            if(AdsInfo.data.length === 0) navigate("/AdsUploadModal", {state: {background: location}});
+            else alert("Only one advertisement can be registered.");
         } else  alert("Connect Wallet");
         }}>
           <AddAds />

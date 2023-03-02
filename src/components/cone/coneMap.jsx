@@ -12,6 +12,8 @@ import D10000Cone from "../../assets/D10000Cone.svg";
 import D20000Cone from "../../assets/D20000Cone.svg";
 import D50000Cone from "../../assets/D50000Cone.svg";
 import { Cone, ConePosition } from "../../redux/AdsUploadReducer";
+import axios from "axios";
+import { Account } from "../../redux/AccountReducer";
 
 function ConeMap() {
   const { isLoaded } = useLoadScript({
@@ -30,25 +32,26 @@ function ConeMap() {
   }, []);
 
   if (!isLoaded) return <div>Loading...</div>;
-
+  
   return <ExampleMap currentPosition={currentPosition} />;
 }
 
-const AdsCone = (SettingCone,SettingConePosition) => {
+const AdsCone = (AdsArea) => {
   let markers = [];
-  SettingCone[0].forEach((distance, index) => {
+  // console.log(AdsArea);
+  AdsArea.forEach((distance) => {
     let marker;
-    switch (distance.distance) {
+    switch (distance.D) {
       case "100m":
         marker = (
           <Marker
-            key={index}
-            position={SettingConePosition[0][index]}
+            key={distance.lat}
+            position={{lat: distance.lat, lng: distance.lng}}
             icon={D100Cone}
             draggable={false}
           >
             <Circle
-              center={SettingConePosition[0][index]}
+              center={{lat: distance.lat, lng: distance.lng}}
               radius={100}
               strokeOpacity={0.8}
               strokeWeight={2}
@@ -60,13 +63,13 @@ const AdsCone = (SettingCone,SettingConePosition) => {
       case "200m":
         marker = (
           <Marker
-            key={index}
-            position={SettingConePosition[0][index]}
+            key={distance.lat}
+            position={{lat: distance.lat, lng: distance.lng}}
             icon={D200Cone}
             draggable={false}
           >
             <Circle
-              center={SettingConePosition[0][index]}
+              center={{lat: distance.lat, lng: distance.lng}}
               radius={200}
               strokeOpacity={0.8}
               strokeWeight={2}
@@ -78,13 +81,13 @@ const AdsCone = (SettingCone,SettingConePosition) => {
       case "500m":
         marker = (
           <Marker
-            key={index}
-            position={SettingConePosition[0][index]}
+            key={{lat: distance.lat, lng: distance.lng}}
+            position={{lat: distance.lat, lng: distance.lng}}
             icon={D500Cone}
             draggable={false}
           >
             <Circle
-              center={SettingConePosition[0][index]}
+              center={{lat: distance.lat, lng: distance.lng}}
               radius={500}
               strokeOpacity={0.8}
               strokeWeight={2}
@@ -96,13 +99,13 @@ const AdsCone = (SettingCone,SettingConePosition) => {
       case "1km":
         marker = (
           <Marker
-            key={index}
-            position={SettingConePosition[0][index]}
+            key={{lat: distance.lat, lng: distance.lng}}
+            position={{lat: distance.lat, lng: distance.lng}}
             icon={D1000Cone}
             draggable={false}
           >
             <Circle
-              center={SettingConePosition[0][index]}
+              center={{lat: distance.lat, lng: distance.lng}}
               radius={1000}
               strokeOpacity={0.8}
               strokeWeight={2}
@@ -114,13 +117,13 @@ const AdsCone = (SettingCone,SettingConePosition) => {
       case "2km":
         marker = (
           <Marker
-            key={index}
-            position={SettingConePosition[0][index]}
+            key={{lat: distance.lat, lng: distance.lng}}
+            position={{lat: distance.lat, lng: distance.lng}}
             icon={D2000Cone}
             draggable={false}
           >
             <Circle
-              center={SettingConePosition[0][index]}
+              center={{lat: distance.lat, lng: distance.lng}}
               radius={2000}
               strokeOpacity={0.8}
               strokeWeight={2}
@@ -132,13 +135,13 @@ const AdsCone = (SettingCone,SettingConePosition) => {
       case "5km":
         marker = (
           <Marker
-            key={index}
-            position={SettingConePosition[0][index]}
+            key={{lat: distance.lat, lng: distance.lng}}
+            position={{lat: distance.lat, lng: distance.lng}}
             icon={D5000Cone}
             draggable={false}
           >
             <Circle
-              center={SettingConePosition[0][index]}
+              center={{lat: distance.lat, lng: distance.lng}}
               radius={5000}
               strokeOpacity={0.8}
               strokeWeight={2}
@@ -150,13 +153,13 @@ const AdsCone = (SettingCone,SettingConePosition) => {
       case "10km":
         marker = (
           <Marker
-            key={index}
-            position={SettingConePosition[0][index]}
+            key={{lat: distance.lat, lng: distance.lng}}
+            position={{lat: distance.lat, lng: distance.lng}}
             icon={D10000Cone}
             draggable={false}
           >
             <Circle
-              center={SettingConePosition[0][index]}
+              center={{lat: distance.lat, lng: distance.lng}}
               radius={10000}
               strokeOpacity={0.8}
               strokeWeight={2}
@@ -168,13 +171,13 @@ const AdsCone = (SettingCone,SettingConePosition) => {
       case "20km":
         marker = (
           <Marker
-            key={index}
-            position={SettingConePosition[0][index]}
+            key={{lat: distance.lat, lng: distance.lng}}
+            position={{lat: distance.lat, lng: distance.lng}}
             icon={D20000Cone}
             draggable={false}
           >
             <Circle
-              center={SettingConePosition[0][index]}
+              center={{lat: distance.lat, lng: distance.lng}}
               radius={20000}
               strokeOpacity={0.8}
               strokeWeight={2}
@@ -186,13 +189,13 @@ const AdsCone = (SettingCone,SettingConePosition) => {
       case "50km":
         marker = (
           <Marker
-            key={index}
-            position={SettingConePosition[0][index]}
+            key={{lat: distance.lat, lng: distance.lng}}
+            position={{lat: distance.lat, lng: distance.lng}}
             icon={D50000Cone}
             draggable={false}
           >
             <Circle
-              center={SettingConePosition[0][index]}
+              center={{lat: distance.lat, lng: distance.lng}}
               radius={50000}
               strokeOpacity={0.8}
               strokeWeight={2}
@@ -210,13 +213,22 @@ const AdsCone = (SettingCone,SettingConePosition) => {
 };
 
 const ExampleMap = ({ currentPosition  }) => {
-  const SettingConePosition = useSelector(ConePosition);
-  const SettingCone = useSelector(Cone);
+  const account = useSelector(Account);
+  const [currentAcc,setCurrentAcc] = useState(account);
+  const [adsArea,setAdsArea] = useState([]);
+  useEffect(()=> {
+    loadAdsInfo();
+    setCurrentAcc(account);
+  },[account])
+  async function loadAdsInfo() {
+    const AdsInfo = await axios.post("http://localhost:3001/loadAdsInfo", currentAcc)
+    setAdsArea(AdsInfo.data);
+  }
   const center = currentPosition;
-  const exist = (SettingCone.length !== 0);
+  const exist = (adsArea.length !== 0);
   return (
     <GoogleMap zoom={15} center={center} mapContainerClassName="map-container1">
-      {exist && AdsCone(SettingCone,SettingConePosition)}
+      {exist && AdsCone(adsArea)}
     </GoogleMap>
   );
 };

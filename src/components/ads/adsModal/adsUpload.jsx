@@ -3,8 +3,8 @@ import { ReactComponent as UploadIcon } from "../../../assets/UploadIcon.svg";
 import {Link,useLocation, useNavigate } from 'react-router-dom';
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fileTitleStore, fileUpload } from "../../../redux/AdsUploadReducer";
-import { Account, AdsCidStore } from "../../../redux/AccountReducer";
+import { fileTitleStore, fileUpload,AdsCidStore } from "../../../redux/AdsUploadReducer";
+import { Account  } from "../../../redux/AccountReducer";
 import axios from "axios";
 // import { useStorageUpload } from "@thirdweb-dev/react";
 
@@ -99,11 +99,7 @@ export const AdsUpload = () => {
         exampleKey: 'exampleValue'
       }
     })
-    formData.append("pinataMetadata", metadata);
-    const options = JSON.stringify({
-      cidVersion: 0,
-    })
-    formData.append('pinataOptions', options);
+    formData.append("metadata", metadata);
 
     //preview image url저장
     const reader = new FileReader();
@@ -117,7 +113,8 @@ export const AdsUpload = () => {
     if (file) {
       try{
         const result = await axios.post("http://localhost:3001/adsfile",formData);
-        console.log(result);
+        console.log(result.data);
+        dispatch(AdsCidStore(result.data));
         navigate("/Detail", { state: { background: location } });
 
             // dispatch(AdsCidStore(result.data.IpfsHash));

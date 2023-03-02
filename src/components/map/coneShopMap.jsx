@@ -246,6 +246,7 @@ const ExamMap = () => {
     };
     return (
       <GoogleMap
+      onLoad={()=>console.log("hi")}
         zoom={15}
         center={currentPosition}
         mapContainerClassName="map-container1"

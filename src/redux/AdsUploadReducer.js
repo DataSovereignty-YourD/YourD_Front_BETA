@@ -12,6 +12,7 @@ const initialState = {
     Cone: [],
     ConePosition: [],
     TokenDeposit: 0,
+    AdsCid: ""
 }
 
 export const fileInfo = (state) => state.AdsUpload.adsfile;
@@ -22,6 +23,8 @@ export const AdsRewardValue = (state) => state.AdsUpload.AdsReward;
 export const Cone = (state)=> state.AdsUpload.Cone;
 export const ConePosition = (state)=> state.AdsUpload.ConePosition;
 export const fileTitle = (state) => state.AdsUpload.filetitle;
+export const AdsCid = (state) => state.AdsUpload.AdsCid;
+
 export const AdsUploadSlice = createSlice({
     name: 'Upload',
     initialState,
@@ -31,6 +34,9 @@ export const AdsUploadSlice = createSlice({
         },
         fileUpload: (state, action) => {
             state.adsfile= action.payload;
+        },
+        AdsCidStore: (state,action)=> {
+            state.AdsCid = action.payload;
         },
         detailinfo: (state, action )=> {
             state.info = [action.payload];
@@ -69,5 +75,5 @@ export const AdsUploadSlice = createSlice({
     serialize: false,
 })
 
-export const {fileUpload, detailinfo, Categorydatastore,DepositValue,AdsRewardStore,AdsUpload,ModalCloseAction,fileTitleStore} = AdsUploadSlice.actions;
+export const {fileUpload, detailinfo, Categorydatastore,DepositValue,AdsRewardStore,AdsUpload,ModalCloseAction,fileTitleStore,AdsCidStore} = AdsUploadSlice.actions;
 export default AdsUploadSlice.reducer;
