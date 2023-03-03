@@ -13,8 +13,6 @@ const pinataSDK = require('@pinata/sdk');
 
 
 let db=[];
-const PINATA_API_KEY="0d11d3cf7d9cf1c20044"
-const PINATA_API_SECRET="dd3cb8492cf4144f1e26738a6bedc9d6b9ae631424d57a356dde3799b9492ecd"
 const PINATA_API_JWT="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mb3JtYXRpb24iOnsiaWQiOiI5Y2QzNDNmZi1iZGI5LTQ0YmUtOTZjYS1lZDc3YTYyYzMwNzAiLCJlbWFpbCI6InJsYXdsZ2hrZDEyQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJwaW5fcG9saWN5Ijp7InJlZ2lvbnMiOlt7ImlkIjoiRlJBMSIsImRlc2lyZWRSZXBsaWNhdGlvbkNvdW50IjoxfSx7ImlkIjoiTllDMSIsImRlc2lyZWRSZXBsaWNhdGlvbkNvdW50IjoxfV0sInZlcnNpb24iOjF9LCJtZmFfZW5hYmxlZCI6ZmFsc2UsInN0YXR1cyI6IkFDVElWRSJ9LCJhdXRoZW50aWNhdGlvblR5cGUiOiJzY29wZWRLZXkiLCJzY29wZWRLZXlLZXkiOiIwZDExZDNjZjdkOWNmMWMyMDA0NCIsInNjb3BlZEtleVNlY3JldCI6ImRkM2NiODQ5MmNmNDE0NGYxZTI2NzM4YTZiZWRjOWQ2YjlhZTYzMTQyNGQ1N2EzNTZkZGUzNzk5Yjk0OTJlY2QiLCJpYXQiOjE2Nzc0MjU2MDZ9.gZk_hjpVv7hMxMuWfM8FhPCvtli6AVchmBaJo2IBAbU"
 const pinata = new pinataSDK({ pinataJWTKey: PINATA_API_JWT});
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -23,7 +21,6 @@ app.use(bodyParser.json());
 const mongoose = require('mongoose');
 const { chownSync } = require('fs');
 const { default: axios } = require('axios');
-const { serialize } = require('v8');
 mongoose.connect(
     'mongodb+srv://hwang:wlghkd34kr!@yourd.pfzdjnl.mongodb.net/?retryWrites=true&w=majority',
     {}
@@ -143,8 +140,8 @@ app.post('/ConeUpdate',async function(req,res ){
 })
 
 app.post('/loadAdsInfo', async function(req,res) {
-    const account = req.body[0];
-    console.log(account,"ㅁㄴㅇㄹ");
+    const account = JSON.stringify(req.body).toString().split("\"")[1];
+    console.log(account);
     const UserAds = await UserAdsModel.findOne({User: account})
     console.log(UserAds);
     if (!UserAds) {
@@ -153,9 +150,6 @@ app.post('/loadAdsInfo', async function(req,res) {
     }
     else return res.status(200).send(UserAds.Position);
 })
-
-
-
 
 app.listen(port, ()=>{
     console.log(`Connect at http://localhost:${port}`); // '가 아닌 좌측상단의 esc버튼 밑의 `다.

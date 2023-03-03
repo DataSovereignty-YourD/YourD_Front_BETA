@@ -29,7 +29,7 @@ const ExamMap = () => {
       );
     }, []);
 
-    if (!isLoaded) return <div>Loading...</div>;
+    if (!isLoaded) return <div className="loading"/>;
 
     return <ExampleMap currentPosition={currentPosition} />;
   }

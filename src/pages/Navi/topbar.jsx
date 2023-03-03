@@ -1,26 +1,46 @@
 import { Icon } from "@iconify/react";
 import axios from "axios";
-import {  useEffect, useState } from "react";
+import {   useEffect,  useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {  useLocation, useNavigate } from "react-router-dom";
 import { Account, AccountStore } from "../../redux/AccountReducer";
 import {  ReadDBAsset } from "../../redux/ConeAssetsReducer";
 
 
-
-
 const TopBar = () => {
   document.body.style = `overflow-y: scroll;`;
-  let storedaccount = useSelector(Account);
+  const storedaccount = useSelector(Account);
   const [account,setAccount] = useState(storedaccount);
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
+  const getProvider = () => {
+    if ("phantom" in window) {
+      const provider = window.phantom?.solana;
+      if (provider?.isPhantom) {
+        return provider;
+      }
+    }
 
+    window.open("https://phantom.app/", "_blank");
+  };
+  
   useEffect(() => {
     console.log("rerender");
   }, [account]);
 
+  
+  useEffect(() => {
+  const provider = getProvider();
+  provider.on("accountChanged", (publicKey) => {
+    if (publicKey) {
+      // Set new public key and continue as usual
+      setAccount(publicKey.toBase58());
+      dispatch(AccountStore(publicKey.toBase58()));
+    }
+  });
+}, [account]);
+  
   const MenuButton = () => {
     return (
       <div className="menu">
@@ -51,27 +71,34 @@ const TopBar = () => {
   };
 
   async function getdbAsset(acc) {
-    const Asset = await axios.post("http://localhost:3001/getasset",acc)
+    const account = JSON.stringify(acc);
+    const Asset = await axios.post("http://localhost:3001/getasset", account)
     dispatch(ReadDBAsset(Asset.data));
   }
-  
+
+
   function ConnectWallet() {
     const Connect = async () => {
-      if(window.ethereum) {
+      const provider = getProvider();
+      if (provider.isConnected) {
+        provider.disconnect();
+        setAccount("");
+        console.log("disconnect");
+        dispatch(AccountStore(""));
+      } else {
         try {
-          const acc = await window.ethereum.request({
-            method: "eth_requestAccounts",
-          });
-          dispatch(AccountStore(acc));
+          const Connection = await provider.connect();
+          const acc = Connection.publicKey.toString();
+          console.log(acc);
           setAccount(acc);
+          dispatch(AccountStore(acc));
           getdbAsset(acc);
-        } catch (error){
+        } catch (error) {
           console.log("Error Connecting");
         }
-      } else {
-        alert("MetaMask not detected");
       }
-    }
+      }
+    
     return (
       <button onClick={()=>Connect()} className="ConnectWallet">
         <span className="material-icons" style={{marginRight: "10px"}}> account_balance_wallet </span>
@@ -110,3 +137,4 @@ const TopBar = () => {
 };
 
 export default TopBar;
+

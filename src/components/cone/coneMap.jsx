@@ -31,7 +31,7 @@ function ConeMap() {
     );
   }, []);
 
-  if (!isLoaded) return <div>Loading...</div>;
+  if (!isLoaded) return <div className="loading" style={{left:"75%"}}/>;
   
   return <ExampleMap currentPosition={currentPosition} />;
 }

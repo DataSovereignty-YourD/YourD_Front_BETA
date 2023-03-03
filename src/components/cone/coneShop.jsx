@@ -67,14 +67,13 @@ const Payment = () => {
     let index = 0;
     
     const List2 = (distance, color, Price) => {
+
       if (CurrentPosition !== null) {
         dispatch(ExamConeStore({ distance, color, Price, index }));
         dispatch(ExampleConeTotal(Price));
         index++;
       }
     };
-
-
     return (
       <div>
         {ConeList.map(({ distance, color, Price }) => (
@@ -112,9 +111,7 @@ const Payment = () => {
                 <section className="ConeCountandPrice">
                   <button
                     className="Remove"
-                    onClick={() => {
-                      dispatch(ExamConeRemove({ index, Price }));
-                    }}
+                    onClick={() => dispatch(ExamConeRemove({ index, Price }))}
                   >
                     Remove
                   </button>
