@@ -77,6 +77,7 @@ const TopBar = () => {
   }
 
 
+  
   function ConnectWallet() {
     const Connect = async () => {
       const provider = getProvider();
