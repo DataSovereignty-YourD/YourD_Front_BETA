@@ -6,32 +6,31 @@ import {  useLocation, useNavigate } from "react-router-dom";
 import { Account, AccountStore } from "../../redux/AccountReducer";
 import {  ReadDBAsset } from "../../redux/ConeAssetsReducer";
 
-
 const TopBar = () => {
   document.body.style = `overflow-y: scroll;`;
   const storedaccount = useSelector(Account);
-  const [account,setAccount] = useState(storedaccount);
+  const [account,setAccount] = useState("EJi18qM7Q9mp5rPQeA7yGE7JzgRLemNKgeXPZv9tjhjS");
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
   const getProvider = () => {
     if ("phantom" in window) {
-      const provider = window.phantom?.solana;
+      const provider = window.phantom.solana;
       if (provider?.isPhantom) {
         return provider;
       }
+    }else {
+      window.open("https://phantom.app/", "_blank");
     }
-
-    window.open("https://phantom.app/", "_blank");
+    return undefined;
   };
   
-  useEffect(() => {
-    console.log("rerender");
-  }, [account]);
+  useEffect(() => {}, [account]);
 
   
   useEffect(() => {
   const provider = getProvider();
+
   provider.on("accountChanged", (publicKey) => {
     if (publicKey) {
       // Set new public key and continue as usual
@@ -43,7 +42,7 @@ const TopBar = () => {
   
   const MenuButton = () => {
     return (
-      <div className="menu">
+      <div className="menu" onClick={() => navigate('/MakeProof')}>
         <Icon
           className="menu_Icon"
           icon="material-symbols:menu"
@@ -72,12 +71,12 @@ const TopBar = () => {
 
   async function getdbAsset(acc) {
     const account = JSON.stringify(acc);
-    const Asset = await axios.post("http://localhost:3001/getasset", account)
+    const Asset = await axios.post("http://13.125.226.19/getasset", account)
     dispatch(ReadDBAsset(Asset.data));
   }
 
 
-  
+
   function ConnectWallet() {
     const Connect = async () => {
       const provider = getProvider();
@@ -97,8 +96,9 @@ const TopBar = () => {
         } catch (error) {
           console.log("Error Connecting");
         }
+        console.log("wallet");
       }
-      }
+    }
     
     return (
       <button onClick={()=>Connect()} className="ConnectWallet">
@@ -111,7 +111,7 @@ const TopBar = () => {
   return (
     <div className="TopBar">
       <section className="leftSection">
-        <MenuButton />
+        <MenuButton/>
         <div className="Logo">D-AD</div>
       </section>
       <section className="Button_sction">
@@ -124,12 +124,12 @@ const TopBar = () => {
         </div>
         <div onClick={async() => {
           if(account !== "") {
-            const AdsInfo = await axios.post("http://localhost:3001/loadAdsInfo", account);
+            const AdsInfo = await axios.post("http://13.125.226.19/loadAdsInfo", account);
             if(AdsInfo.data.length === 0) navigate("/AdsUploadModal", {state: {background: location}});
             else alert("Only one advertisement can be registered.");
         } else  alert("Connect Wallet");
         }}>
-          <AddAds />
+          <AddAds/>
         </div>
         {ConnectWallet()}
       </section>

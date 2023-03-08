@@ -221,7 +221,7 @@ const ExampleMap = ({ currentPosition  }) => {
     setCurrentAcc(account);
   },[account])
   async function loadAdsInfo() {
-    const AdsInfo = await axios.post("http://localhost:3001/loadAdsInfo", currentAcc)
+    const AdsInfo = await axios.post("http://13.125.226.19/loadAdsInfo", currentAcc)
     setAdsArea(AdsInfo.data);
   }
   const center = currentPosition;

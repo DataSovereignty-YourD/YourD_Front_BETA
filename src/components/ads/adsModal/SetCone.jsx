@@ -52,7 +52,7 @@ const ConeBalance = () => {
     {color: "#000000", Distance: "50km",Count: 0},
   ]);
 
-  const CountOnce = () => {
+  function CountOnce() {
     ConeTemp.map((Distance) => {
       switch (Distance.distance) {
         case "100m" : count[0].Count++; break;
@@ -72,7 +72,7 @@ const ConeBalance = () => {
     // return 0;
   }
 
-  useEffect(CountOnce,[]);
+  useEffect(() => CountOnce(),[]);
   
   const SetConeClick =  (distance) => {
     try {

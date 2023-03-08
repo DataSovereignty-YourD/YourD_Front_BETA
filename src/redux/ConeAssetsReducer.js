@@ -36,7 +36,7 @@ export const ConeAssetsSlice = createSlice({
       state.ExampleConeDistance= [];
       state.TotalCount=0;
       state.TotalPrice=0;
-      axios.post('http://localhost:3001/ConeUpdate', {Asset: state.ConeAssets,Account: action.payload});
+      axios.post('http://13.125.226.19/ConeUpdate', {Asset: state.ConeAssets,Account: action.payload});
     },
     ExamConeStore: (state, action) => {
       state.ExampleConeDistance.push(action.payload);
@@ -68,7 +68,7 @@ export const ConeAssetsSlice = createSlice({
       state.ConeAssets = state.ConeAssets.filter(item1 => {
         return !state.SetConeTemp.some(item2 => item1.index === item2.index);
       })
-      axios.post('http://localhost:3001/ConeUpdate', {Asset: state.ConeAssets,Account: action.payload});
+      axios.post('http://13.125.226.19/ConeUpdate', {Asset: state.ConeAssets,Account: action.payload});
       state.SetConeTemp= [];
       state.ConePosition = [];
     },

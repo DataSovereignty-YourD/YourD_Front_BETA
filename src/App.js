@@ -6,6 +6,7 @@ import Detail from './components/ads/adsModal/detail';
 import VideoInfo from './components/ads/adsModal/videoInfo';
 import SetCone from './components/ads/adsModal/SetCone';
 import Check from './components/ads/adsModal/adsInfoCheck'
+import MakeProof from './pages/makeProof';
 function App() {
   const location = useLocation();
   const background = location.state && location.state.background;
@@ -20,6 +21,7 @@ function App() {
           <Route path="SetCone" element={<SetCone />} />
           <Route path="Check" element={<Check />} />
         </Route>
+          <Route exact path="MakeProof" element={<MakeProof/>}/>
       </Routes>
 
       {background && (
