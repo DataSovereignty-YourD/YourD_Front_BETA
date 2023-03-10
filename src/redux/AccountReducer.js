@@ -11,7 +11,7 @@ export const AccountSlice = createSlice({
   initialState,
   reducers: {
     AccountStore: (state, action) => {
-      state.account = action.payload;
+      state.account= action.payload;
     },
   },
 });

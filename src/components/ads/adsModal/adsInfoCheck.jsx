@@ -7,7 +7,7 @@ import { StepCircle } from "./addAdsStep";
 import CheckConeMap from "../../map/checkConeMap";
 import axios from "axios";
 import { Account } from "../../../redux/AccountReducer";
-
+const ServerURL = "localhost:8000";
 const BackNextButton = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -41,8 +41,8 @@ const BackNextButton = () => {
         AdsCid: cid
       };
       const Save =async()=> {
-        const result = await axios.post('http://13.125.226.19/upload', {
-          Data: uploadData,
+        const result = await axios.post(`http://${ServerURL}/upload`, {
+          Data: uploadData, 
         });
         console.log(result);
         dispatch(AdsUpload([Position,basket]));

@@ -24,3 +24,5 @@ yarn-debug.log*
 yarn-error.log*
 server.zip
 server/아카이브.zip
+
+webpack.config.js

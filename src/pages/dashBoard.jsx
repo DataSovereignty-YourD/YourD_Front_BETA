@@ -5,7 +5,6 @@ import Overview from "../components/ads/overview";
 import ConeMap from "../components/cone/coneMap";
 import { Account } from "../redux/AccountReducer";
 
-
 const DashBoard = () => {
     const account = useSelector(Account);
 
@@ -18,7 +17,7 @@ const DashBoard = () => {
             </section>
             <section className="ConePart">
                 <div className="Cone_title">Cone</div>
-                {account ===""? <div>Connect Wallet</div>: <ConeMap/>}
+                {account === ""? <div>Connect Wallet</div>: <ConeMap/>}
             </section>
         </section>
     )

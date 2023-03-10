@@ -132,12 +132,18 @@ const Payment = () => {
     const currentAccount = useSelector(Account);
     const TotalCount = useSelector(TotalCountValue);
     const TotalPrice = useSelector(TotalPriceValue);
+    useEffect(()=> {
+      if(currentAccount === "") {
+        alert("Connect Wallet!");
+        navigate("/");
+      }
+    },[currentAccount])
 
     function BalanceUpdate() {
       dispatch(ConeAssetsStore(currentAccount));
       navigate("/");
-      
     }
+
     return (
       <div className="PaymentBox">
         <div className="TotalCount">Total Count: {TotalCount}</div>

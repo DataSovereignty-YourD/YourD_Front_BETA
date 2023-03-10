@@ -38,7 +38,6 @@ function ConeMap() {
 
 const AdsCone = (AdsArea) => {
   let markers = [];
-  // console.log(AdsArea);
   AdsArea.forEach((distance) => {
     let marker;
     switch (distance.D) {
@@ -213,19 +212,23 @@ const AdsCone = (AdsArea) => {
 };
 
 const ExampleMap = ({ currentPosition  }) => {
+  const [adsArea,setAdsArea] = useState([]);
   const account = useSelector(Account);
   const [currentAcc,setCurrentAcc] = useState(account);
-  const [adsArea,setAdsArea] = useState([]);
+
   useEffect(()=> {
     loadAdsInfo();
-    setCurrentAcc(account);
-  },[account])
+  },[currentAcc])
+
   async function loadAdsInfo() {
-    const AdsInfo = await axios.post("http://13.125.226.19/loadAdsInfo", currentAcc)
+    // const AdsInfo = await axios.post("https://www.yourdserver.store/loadadsinfo", currentAcc)
+    const AdsInfo = await axios.post("http://localhost:8000/loadadsinfo", {Account: currentAcc})
     setAdsArea(AdsInfo.data);
+    
   }
+  
   const center = currentPosition;
-  const exist = (adsArea.length !== 0);
+  const exist = (adsArea !== "None");
   return (
     <GoogleMap zoom={15} center={center} mapContainerClassName="map-container1">
       {exist && AdsCone(adsArea)}

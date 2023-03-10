@@ -112,7 +112,8 @@ export const AdsUpload = () => {
     // Authorization: `${process.env.REACT_APP_PINATA_API_JWT}`,
     if (file) {
       try{
-        const result = await axios.post("http://13.125.226.19/adsfile",formData);
+        const result = await axios.post("/adsfile",formData);
+        // const result = await axios.post("https://www.yourdserver.store/adsfile",formData);
         console.log(result.data);
         dispatch(AdsCidStore(result.data));
         navigate("/Detail", { state: { background: location } });
