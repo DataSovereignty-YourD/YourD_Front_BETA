@@ -49,10 +49,11 @@ const ConeList = [
   { distance: "20km", color: "#CC3FA4", Price: 2000 },
   { distance: "50km", color: "#000000", Price: 5000 },
 ];
+
 const Payment = () => {
   const dispatch = useDispatch();
   const [CurrentPosition, setCurrentPosition] = useState([]);
-  const Cone = useSelector(ConeAssetsValue);
+
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
       (position) => {
@@ -65,10 +66,9 @@ const Payment = () => {
 
   const ConeSelect = () => {
     let index = 0;
-    
     const List2 = (distance, color, Price) => {
 
-      if (CurrentPosition !== null) {
+      if (CurrentPosition !== []) {
         dispatch(ExamConeStore({ distance, color, Price, index }));
         dispatch(ExampleConeTotal(Price));
         index++;

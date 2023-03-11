@@ -13,15 +13,15 @@ import D20000Cone from "../../assets/D20000Cone.svg";
 import D50000Cone from "../../assets/D50000Cone.svg";
 import { Cone, ConePosition } from "../../redux/AdsUploadReducer";
 import axios from "axios";
-import { Account } from "../../redux/AccountReducer";
 
-function ConeMap() {
+function ConeMap(props) {
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAP_API,
   });
-  const [currentPosition, setCurrentPosition] = useState(null);
-
+  const [currentPosition, setCurrentPosition] = useState(props.Account);
+  console.log("rerender")
   useEffect(() => {
+    console.log("rereder2")
     navigator.geolocation.getCurrentPosition(
       (position) => {
         const { latitude, longitude } = position.coords;
@@ -33,198 +33,58 @@ function ConeMap() {
 
   if (!isLoaded) return <div className="loading" style={{left:"75%"}}/>;
   
-  return <ExampleMap currentPosition={currentPosition} />;
+  return <ExampleMap currentPosition={currentPosition} account={props.Account} />;
 }
-
-const AdsCone = (AdsArea) => {
-  let markers = [];
-  AdsArea.forEach((distance) => {
-    let marker;
-    switch (distance.D) {
-      case "100m":
-        marker = (
-          <Marker
-            key={distance.lat}
-            position={{lat: distance.lat, lng: distance.lng}}
-            icon={D100Cone}
-            draggable={false}
-          >
-            <Circle
-              center={{lat: distance.lat, lng: distance.lng}}
-              radius={100}
-              strokeOpacity={0.8}
-              strokeWeight={2}
-              fillOpacity={0.35}
-            />
-          </Marker>
-        );
-        break;
-      case "200m":
-        marker = (
-          <Marker
-            key={distance.lat}
-            position={{lat: distance.lat, lng: distance.lng}}
-            icon={D200Cone}
-            draggable={false}
-          >
-            <Circle
-              center={{lat: distance.lat, lng: distance.lng}}
-              radius={200}
-              strokeOpacity={0.8}
-              strokeWeight={2}
-              fillOpacity={0.35}
-            />
-          </Marker>
-        );
-        break;
-      case "500m":
-        marker = (
-          <Marker
-            key={{lat: distance.lat, lng: distance.lng}}
-            position={{lat: distance.lat, lng: distance.lng}}
-            icon={D500Cone}
-            draggable={false}
-          >
-            <Circle
-              center={{lat: distance.lat, lng: distance.lng}}
-              radius={500}
-              strokeOpacity={0.8}
-              strokeWeight={2}
-              fillOpacity={0.35}
-            />
-          </Marker>
-        );
-        break;
-      case "1km":
-        marker = (
-          <Marker
-            key={{lat: distance.lat, lng: distance.lng}}
-            position={{lat: distance.lat, lng: distance.lng}}
-            icon={D1000Cone}
-            draggable={false}
-          >
-            <Circle
-              center={{lat: distance.lat, lng: distance.lng}}
-              radius={1000}
-              strokeOpacity={0.8}
-              strokeWeight={2}
-              fillOpacity={0.35}
-            />
-          </Marker>
-        );
-        break;
-      case "2km":
-        marker = (
-          <Marker
-            key={{lat: distance.lat, lng: distance.lng}}
-            position={{lat: distance.lat, lng: distance.lng}}
-            icon={D2000Cone}
-            draggable={false}
-          >
-            <Circle
-              center={{lat: distance.lat, lng: distance.lng}}
-              radius={2000}
-              strokeOpacity={0.8}
-              strokeWeight={2}
-              fillOpacity={0.35}
-            />
-          </Marker>
-        );
-        break;
-      case "5km":
-        marker = (
-          <Marker
-            key={{lat: distance.lat, lng: distance.lng}}
-            position={{lat: distance.lat, lng: distance.lng}}
-            icon={D5000Cone}
-            draggable={false}
-          >
-            <Circle
-              center={{lat: distance.lat, lng: distance.lng}}
-              radius={5000}
-              strokeOpacity={0.8}
-              strokeWeight={2}
-              fillOpacity={0.35}
-            />
-          </Marker>
-        );
-        break;
-      case "10km":
-        marker = (
-          <Marker
-            key={{lat: distance.lat, lng: distance.lng}}
-            position={{lat: distance.lat, lng: distance.lng}}
-            icon={D10000Cone}
-            draggable={false}
-          >
-            <Circle
-              center={{lat: distance.lat, lng: distance.lng}}
-              radius={10000}
-              strokeOpacity={0.8}
-              strokeWeight={2}
-              fillOpacity={0.35}
-            />
-          </Marker>
-        );
-        break;
-      case "20km":
-        marker = (
-          <Marker
-            key={{lat: distance.lat, lng: distance.lng}}
-            position={{lat: distance.lat, lng: distance.lng}}
-            icon={D20000Cone}
-            draggable={false}
-          >
-            <Circle
-              center={{lat: distance.lat, lng: distance.lng}}
-              radius={20000}
-              strokeOpacity={0.8}
-              strokeWeight={2}
-              fillOpacity={0.35}
-            />
-          </Marker>
-        );
-        break;
-      case "50km":
-        marker = (
-          <Marker
-            key={{lat: distance.lat, lng: distance.lng}}
-            position={{lat: distance.lat, lng: distance.lng}}
-            icon={D50000Cone}
-            draggable={false}
-          >
-            <Circle
-              center={{lat: distance.lat, lng: distance.lng}}
-              radius={50000}
-              strokeOpacity={0.8}
-              strokeWeight={2}
-              fillOpacity={0.35}
-            />
-          </Marker>
-        );
-        break;
-      default:
-        break;
-    }
-    markers.push(marker);
-  });
-  return markers;
+const markerConfig = {
+  "100m": { icon: D100Cone, radius: 100 },
+  "200m": { icon: D200Cone, radius: 200 },
+  "500m": { icon: D500Cone, radius: 500 },
+  "1km": { icon: D1000Cone, radius: 1000 },
+  "2km": { icon: D2000Cone, radius: 2000 },
+  "5km": { icon: D5000Cone, radius: 5000 },
+  "10km": { icon: D10000Cone, radius: 10000 },
+  "20km": { icon: D20000Cone, radius: 20000 },
+  "50km": { icon: D50000Cone, radius: 50000 },
 };
 
-const ExampleMap = ({ currentPosition  }) => {
+const AdsCone = (AdsArea) => {
+  console.log("rereder3")
+  return AdsArea.map((distance) => {
+    const config = markerConfig[distance.D];
+    if (!config) return null;
+
+    return (
+      <Marker
+        key={distance.lat}
+        position={{lat: distance.lat, lng: distance.lng}}
+        icon={config.icon}
+        draggable={false}
+      >
+        <Circle
+          center={{lat: distance.lat, lng: distance.lng}}
+          radius={config.radius}
+          strokeOpacity={0.8}
+          strokeWeight={2}
+          fillOpacity={0.35}
+        />
+      </Marker>
+    );
+  }).filter((marker) => marker !== null);
+};
+const ExampleMap = ({ currentPosition , account }) => {
+  console.log(account);
   const [adsArea,setAdsArea] = useState([]);
-  const account = useSelector(Account);
   const [currentAcc,setCurrentAcc] = useState(account);
 
   useEffect(()=> {
     loadAdsInfo();
-  },[currentAcc])
+  },[account])
 
   async function loadAdsInfo() {
     // const AdsInfo = await axios.post("https://www.yourdserver.store/loadadsinfo", currentAcc)
     const AdsInfo = await axios.post("http://localhost:8000/loadadsinfo", {Account: currentAcc})
+    console.log(AdsInfo.data);
     setAdsArea(AdsInfo.data);
-    
   }
   
   const center = currentPosition;

@@ -12,6 +12,18 @@ import { GoogleMap, useLoadScript, Marker, Circle, } from "@react-google-maps/ap
 import { useState, Fragment, useEffect } from "react";
 import { useSelector  } from "react-redux";
 
+const markerConfig = {
+  "100m": { icon: D100Cone, radius: 100 },
+  "200m": { icon: D200Cone, radius: 200 },
+  "500m": { icon: D500Cone, radius: 500 },
+  "1km": { icon: D1000Cone, radius: 1000 },
+  "2km": { icon: D2000Cone, radius: 2000 },
+  "5km": { icon: D5000Cone, radius: 5000 },
+  "10km": { icon: D10000Cone, radius: 10000 },
+  "20km": { icon: D20000Cone, radius: 20000 },
+  "50km": { icon: D50000Cone, radius: 50000 },
+};
+
 const ExamMap = () => {
   function ConeMap() {
     const [currentPosition, setCurrentPosition] = useState(null);
@@ -33,9 +45,11 @@ const ExamMap = () => {
 
     return <ExampleMap currentPosition={currentPosition} />;
   }
+
   const ExampleMap = ({ currentPosition }) => {
     const ExamConeDistance = useSelector(ExampleConeDistanceValue);
     const [markerPositions, setMarkerPositions] = useState([]);
+    console.log("ExamConeDistance", ExamConeDistance);
 
     useEffect(() => {
       let positions = [];
@@ -48,7 +62,7 @@ const ExamMap = () => {
           positions[positions.length] = currentPosition;
           setMarkerPositions(positions);
         }
-      }
+      } 
     }, [ExamConeDistance]);
 
     const handleMarkerDragEnd = (index, event) => {
@@ -61,192 +75,217 @@ const ExamMap = () => {
     };
 
     const createCone = () => {
-      let markers = [];
-      // Initialize marker positions
-      ExamConeDistance.forEach((distance, index) => {
-        let marker;
-        switch (distance.distance) {
-          case "100m":
-            marker = (
-              <Marker
-                key={index}
-                position={markerPositions[index]}
-                icon={D100Cone}
-                draggable={true}
-                onDragEnd={(event) => handleMarkerDragEnd(index, event)}
-              >
-                <Circle
-                  center={markerPositions[index]}
-                  radius={100}
-                  strokeOpacity={0.8}
-                  strokeWeight={2}
-                  fillOpacity={0.35}
-                />
-              </Marker>
-            );
-            break;
-          case "200m":
-            marker = (
-              <Marker
-                key={index}
-                position={markerPositions[index]}
-                icon={D200Cone}
-                draggable={true}
-                onDragEnd={(event) => handleMarkerDragEnd(index, event)}
-              >
-                <Circle
-                  center={markerPositions[index]}
-                  radius={200}
-                  strokeOpacity={0.8}
-                  strokeWeight={2}
-                  fillOpacity={0.35}
-                />
-              </Marker>
-            );
-            break;
-          case "500m":
-            marker = (
-              <Marker
-                key={index}
-                position={markerPositions[index]}
-                icon={D500Cone}
-                draggable={true}
-                onDragEnd={(event) => handleMarkerDragEnd(index, event)}
-              >
-                <Circle
-                  center={markerPositions[index]}
-                  radius={500}
-                  strokeOpacity={0.8}
-                  strokeWeight={2}
-                  fillOpacity={0.35}
-                />
-              </Marker>
-            );
-            break;
-          case "1km":
-            marker = (
-              <Marker
-                key={index}
-                position={markerPositions[index]}
-                icon={D1000Cone}
-                draggable={true}
-                onDragEnd={(event) => handleMarkerDragEnd(index, event)}
-              >
-                <Circle
-                  center={markerPositions[index]}
-                  radius={1000}
-                  strokeOpacity={0.8}
-                  strokeWeight={2}
-                  fillOpacity={0.35}
-                />
-              </Marker>
-            );
-            break;
-          case "2km":
-            marker = (
-              <Marker
-                key={index}
-                position={markerPositions[index]}
-                icon={D2000Cone}
-                draggable={true}
-                onDragEnd={(event) => handleMarkerDragEnd(index, event)}
-              >
-                <Circle
-                  center={markerPositions[index]}
-                  radius={2000}
-                  strokeOpacity={0.8}
-                  strokeWeight={2}
-                  fillOpacity={0.35}
-                />
-              </Marker>
-            );
-            break;
-          case "5km":
-            marker = (
-              <Marker
-                key={index}
-                position={markerPositions[index]}
-                icon={D5000Cone}
-                draggable={true}
-                onDragEnd={(event) => handleMarkerDragEnd(index, event)}
-              >
-                <Circle
-                  center={markerPositions[index]}
-                  radius={5000}
-                  strokeOpacity={0.8}
-                  strokeWeight={2}
-                  fillOpacity={0.35}
-                />
-              </Marker>
-            );
-            break;
-          case "10km":
-            marker = (
-              <Marker
-                key={index}
-                position={markerPositions[index]}
-                icon={D10000Cone}
-                draggable={true}
-                onDragEnd={(event) => handleMarkerDragEnd(index, event)}
-              >
-                <Circle
-                  center={markerPositions[index]}
-                  radius={10000}
-                  strokeOpacity={0.8}
-                  strokeWeight={2}
-                  fillOpacity={0.35}
-                />
-              </Marker>
-            );
-            break;
-          case "20km":
-            marker = (
-              <Marker
-                key={index}
-                position={markerPositions[index]}
-                icon={D20000Cone}
-                draggable={true}
-                onDragEnd={(event) => handleMarkerDragEnd(index, event)}
-              >
-                <Circle
-                  center={markerPositions[index]}
-                  radius={20000}
-                  strokeOpacity={0.8}
-                  strokeWeight={2}
-                  fillOpacity={0.35}
-                />
-              </Marker>
-            );
-            break;
-          case "50km":
-            marker = (
-              <Marker
-                key={index}
-                position={markerPositions[index]}
-                icon={D50000Cone}
-                draggable={true}
-                onDragEnd={(event) => handleMarkerDragEnd(index, event)}
-              >
-                <Circle
-                  center={markerPositions[index]}
-                  radius={50000}
-                  strokeOpacity={0.8}
-                  strokeWeight={2}
-                  fillOpacity={0.35}
-                />
-              </Marker>
-            );
-            break;
-          default:
-            break;
-        }
-        markers.push(marker);
-      });
-      return markers;
+      return ExamConeDistance.map((distance,index) => {
+        console.log(distance);
+        const config = markerConfig[distance.distance];
+        if (!config) return null;
+        console.log("createCone index",index);
+        return (
+          <Marker
+            key={index}
+            position={markerPositions[index]}
+            icon={config.icon}
+            draggable={true}
+            onDragEnd={(event) => handleMarkerDragEnd(index, event)}
+          >
+            <Circle
+              center={markerPositions[index]}
+              radius={config.radius}
+              strokeOpacity={0.8}
+              strokeWeight={2}
+              fillOpacity={0.35}
+            />
+          </Marker>
+        );
+      }).filter((marker) => marker !== null);
     };
+
+    // const createCone = () => {
+    //   let markers = [];
+    //   // Initialize marker positions
+    //   ExamConeDistance.forEach((distance, index) => {
+    //     let marker;
+    //     switch (distance.distance) {
+    //       case "100m":
+    //         marker = (
+    //           <Marker
+    //             key={index}
+    //             position={markerPositions[index]}
+    //             icon={D100Cone}
+    //             draggable={true}
+    //             onDragEnd={(event) => handleMarkerDragEnd(index, event)}
+    //           >
+    //             <Circle
+    //               center={markerPositions[index]}
+    //               radius={100}
+    //               strokeOpacity={0.8}
+    //               strokeWeight={2}
+    //               fillOpacity={0.35}
+    //             />
+    //           </Marker>
+    //         );
+    //         break;
+    //       case "200m":
+    //         marker = (
+    //           <Marker
+    //             key={index}
+    //             position={markerPositions[index]}
+    //             icon={D200Cone}
+    //             draggable={true}
+    //             onDragEnd={(event) => handleMarkerDragEnd(index, event)}
+    //           >
+    //             <Circle
+    //               center={markerPositions[index]}
+    //               radius={200}
+    //               strokeOpacity={0.8}
+    //               strokeWeight={2}
+    //               fillOpacity={0.35}
+    //             />
+    //           </Marker>
+    //         );
+    //         break;
+    //       case "500m":
+    //         marker = (
+    //           <Marker
+    //             key={index}
+    //             position={markerPositions[index]}
+    //             icon={D500Cone}
+    //             draggable={true}
+    //             onDragEnd={(event) => handleMarkerDragEnd(index, event)}
+    //           >
+    //             <Circle
+    //               center={markerPositions[index]}
+    //               radius={500}
+    //               strokeOpacity={0.8}
+    //               strokeWeight={2}
+    //               fillOpacity={0.35}
+    //             />
+    //           </Marker>
+    //         );
+    //         break;
+    //       case "1km":
+    //         marker = (
+    //           <Marker
+    //             key={index}
+    //             position={markerPositions[index]}
+    //             icon={D1000Cone}
+    //             draggable={true}
+    //             onDragEnd={(event) => handleMarkerDragEnd(index, event)}
+    //           >
+    //             <Circle
+    //               center={markerPositions[index]}
+    //               radius={1000}
+    //               strokeOpacity={0.8}
+    //               strokeWeight={2}
+    //               fillOpacity={0.35}
+    //             />
+    //           </Marker>
+    //         );
+    //         break;
+    //       case "2km":
+    //         marker = (
+    //           <Marker
+    //             key={index}
+    //             position={markerPositions[index]}
+    //             icon={D2000Cone}
+    //             draggable={true}
+    //             onDragEnd={(event) => handleMarkerDragEnd(index, event)}
+    //           >
+    //             <Circle
+    //               center={markerPositions[index]}
+    //               radius={2000}
+    //               strokeOpacity={0.8}
+    //               strokeWeight={2}
+    //               fillOpacity={0.35}
+    //             />
+    //           </Marker>
+    //         );
+    //         break;
+    //       case "5km":
+    //         marker = (
+    //           <Marker
+    //             key={index}
+    //             position={markerPositions[index]}
+    //             icon={D5000Cone}
+    //             draggable={true}
+    //             onDragEnd={(event) => handleMarkerDragEnd(index, event)}
+    //           >
+    //             <Circle
+    //               center={markerPositions[index]}
+    //               radius={5000}
+    //               strokeOpacity={0.8}
+    //               strokeWeight={2}
+    //               fillOpacity={0.35}
+    //             />
+    //           </Marker>
+    //         );
+    //         break;
+    //       case "10km":
+    //         marker = (
+    //           <Marker
+    //             key={index}
+    //             position={markerPositions[index]}
+    //             icon={D10000Cone}
+    //             draggable={true}
+    //             onDragEnd={(event) => handleMarkerDragEnd(index, event)}
+    //           >
+    //             <Circle
+    //               center={markerPositions[index]}
+    //               radius={10000}
+    //               strokeOpacity={0.8}
+    //               strokeWeight={2}
+    //               fillOpacity={0.35}
+    //             />
+    //           </Marker>
+    //         );
+    //         break;
+    //       case "20km":
+    //         marker = (
+    //           <Marker
+    //             key={index}
+    //             position={markerPositions[index]}
+    //             icon={D20000Cone}
+    //             draggable={true}
+    //             onDragEnd={(event) => handleMarkerDragEnd(index, event)}
+    //           >
+    //             <Circle
+    //               center={markerPositions[index]}
+    //               radius={20000}
+    //               strokeOpacity={0.8}
+    //               strokeWeight={2}
+    //               fillOpacity={0.35}
+    //             />
+    //           </Marker>
+    //         );
+    //         break;
+    //       case "50km":
+    //         marker = (
+    //           <Marker
+    //             key={index}
+    //             position={markerPositions[index]}
+    //             icon={D50000Cone}
+    //             draggable={true}
+    //             onDragEnd={(event) => handleMarkerDragEnd(index, event)}
+    //           >
+    //             <Circle
+    //               center={markerPositions[index]}
+    //               radius={50000}
+    //               strokeOpacity={0.8}
+    //               strokeWeight={2}
+    //               fillOpacity={0.35}
+    //             />
+    //           </Marker>
+    //         );
+    //         break;
+    //       default:
+    //         break;
+    //     }
+    //     markers.push(marker);
+    //   });
+    //   return markers;
+    // };
     return (
       <GoogleMap
-      onLoad={()=>console.log("hi")}
         zoom={15}
         center={currentPosition}
         mapContainerClassName="map-container1"

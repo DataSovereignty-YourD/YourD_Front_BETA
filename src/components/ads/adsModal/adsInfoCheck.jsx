@@ -44,10 +44,10 @@ const BackNextButton = () => {
         const result = await axios.post(`http://${ServerURL}/upload`, {
           Data: uploadData, 
         });
-        console.log(result);
+        console.log(result.data);
         dispatch(AdsUpload([Position,basket]));
         dispatch(UseCone(account));
-        navigate("/");
+        navigate("/",{ replace: true });
       }
       return (
         <div

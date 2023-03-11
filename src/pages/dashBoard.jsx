@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Analyticschart24H from "../components/ads/analyticschart24H";
 import Analyticschart7D from "../components/ads/analyticschart7D";
@@ -7,7 +8,10 @@ import { Account } from "../redux/AccountReducer";
 
 const DashBoard = () => {
     const account = useSelector(Account);
-
+    const [currentAccount, setCurrentAccount] = useState(account);
+    useEffect(()=> {
+        console.log("DashBoard Rerender");
+    },[currentAccount])
     return (
         <section className="main">
             <section className="AnalyticsPart">
@@ -17,7 +21,7 @@ const DashBoard = () => {
             </section>
             <section className="ConePart">
                 <div className="Cone_title">Cone</div>
-                {account === ""? <div>Connect Wallet</div>: <ConeMap/>}
+                {account === ""? <div>Connect Wallet</div>: <ConeMap Account={account}/>}
             </section>
         </section>
     )

@@ -16,10 +16,9 @@ const TopBar = () => {
   const [account,setAccount] = useState(storedaccount);
   const navigate = useNavigate();
   const location = useLocation();
-  const dispatch = useDispatch();
   
   useEffect(() => {
-    console.log(storedaccount);
+    console.log("TopBar Rerender");
   }, [account,storedaccount]);
   
 
@@ -57,12 +56,10 @@ const TopBar = () => {
     if(account !== "" && account !== undefined) {
       const AdsInfo = await axios.post("http://localhost:8000/loadadsinfo", {Account: account});
       // const AdsInfo = await axios.post("https://www.yourdserver.store/loadAdsInfo", account);
-      console.log(AdsInfo);
       if(AdsInfo.data === "None") navigate("/AdsUploadModal", {state: {background: location}});
       else alert("Only one advertisement can be registered.");
   } else  alert("Connect Wallet");
-    }
-
+  }
 
   return (
     <div className="TopBar">
