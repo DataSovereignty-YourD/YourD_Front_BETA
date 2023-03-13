@@ -4,10 +4,11 @@ import {   useEffect,  useState } from "react";
 import { useSelector } from "react-redux";
 import {  useLocation, useNavigate } from "react-router-dom";
 import ConnectWallet from "../../components/account/ConnectWallet";
+// import { GetBalance } from "../../functions/Account/TokenBalance";
 import { Account } from "../../redux/AccountReducer";
 const ServerURL="http://localhost:8000";
 // "https://www.yourdserver.store/"
-
+// import * as solanaWeb3 from "@solana/web3.js";
 
 const TopBar = () => {
   document.body.style = `overflow-y: scroll;`;
@@ -50,6 +51,15 @@ const TopBar = () => {
     );
   };
 
+  const Balance = () => {
+    // GetBalance()
+    return (
+      <div className="BalanceSection">
+        100 CAT
+      </div>
+    )
+  }
+
   async function LoadAdsInfo() {
     console.log(storedaccount);
     if(account !== "" && account !== undefined) {
@@ -58,7 +68,7 @@ const TopBar = () => {
       else alert("Only one advertisement can be registered.");
   } else  alert("Connect Wallet");
   }
-
+  
   return (
     <div className="TopBar">
       <section className="leftSection">
@@ -76,6 +86,7 @@ const TopBar = () => {
         <div onClick={() => LoadAdsInfo()}>
           <AddAds/>
         </div>
+        <Balance/>
         <ConnectWallet StoredAccount={account} SetState={setAccount}/>
       </section>
     </div>

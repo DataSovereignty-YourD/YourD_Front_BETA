@@ -53,6 +53,19 @@
                 background-color: #292D32;
             }
         }
+        .BalanceSection {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 15px;
+            width: auto;
+            margin: 10px 10px;
+            padding: 0 20px;
+            height: 36px;
+            background-color:#292D32;
+            color: white;
+            font-size: 12px;
+        }
         .ConnectWallet {
             display: flex;
             justify-content: center;

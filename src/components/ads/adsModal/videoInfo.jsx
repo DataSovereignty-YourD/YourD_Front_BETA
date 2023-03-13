@@ -13,14 +13,14 @@ import {
 
 const CATEGORY_LIST = [
   { id: 0, data: "Art" },
-  { id: 1, data: "Architecture" },
+  { id: 1, data: "FestFood" },
   { id: 2, data: "Korean calligraphy" },
   { id: 3, data: "Cinema" },
-  { id: 4, data: "Dance" },
+  { id: 4, data: "Restaurant" },
   { id: 5, data: "Illustration" },
   { id: 6, data: "Fashion" },
   { id: 7, data: "Graphic design" },
-  { id: 8, data: "Literature" },
+  { id: 8, data: "Web3" },
 ];
 
 const VideoInfoBody = () => {

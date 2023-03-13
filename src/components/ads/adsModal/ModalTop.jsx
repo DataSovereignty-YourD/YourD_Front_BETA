@@ -4,7 +4,7 @@ import { fileTitle, ModalCloseAction } from "../../../redux/AdsUploadReducer";
 import { ExampleConeReset, TempConeReset } from "../../../redux/ConeAssetsReducer";
 import { Icon } from "@iconify/react";
 
-export default function AddAdsModalTop() {
+export default function AddAdsModalTop(modaltitle) {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const title = useSelector(fileTitle);
@@ -17,7 +17,7 @@ export default function AddAdsModalTop() {
 
     return (
       <div className="ModalTop">
-        <div className="ModalTitle">{title}</div>
+        <div className="ModalTitle">{ modaltitle === undefined ? title : modaltitle.modaltitle }</div>
         <div onClick={ModalClose} className="CloseButton">
           <Icon icon="mingcute:close-fill" color="white" width="30" />
         </div>

@@ -68,7 +68,7 @@ const ExampleMap = ({ currentPosition , account }) => {
 
   useEffect(()=> {
     loadAdsInfo();
-  },[account,adsArea])
+  },[account])
 
   async function loadAdsInfo() {
     const AdsInfo = await axios.post(`${ServerURL}/loadadsinfo`, {Account: account})

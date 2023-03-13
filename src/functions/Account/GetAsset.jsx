@@ -6,7 +6,7 @@ export function GetAsset(account) {
     axios.post(`${ServerURL}/getasset`, {Account: account})
         .then((res) => {
             result = res.data;
-            console.log(result);
             return result
-        })
+        }
+    )
 }

@@ -154,7 +154,7 @@ const ConeShop = () => {
     <div className="Container">
       <div className="Background">
         <div className="Modal">
-          <AddAdsModalTop />
+          <AddAdsModalTop modaltitle={"ConeShop"}/>
           <section className="Modal_body">
             <section className="ConeShop_body_Left">
               <ExamMap/>

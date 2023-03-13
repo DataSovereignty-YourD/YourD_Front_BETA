@@ -10,9 +10,6 @@ import { Account } from "../redux/AccountReducer";
 
 const DashBoard = () => {
     const account = useSelector(Account);
-    // const [currentAccount, setCurrentAccount] = useState(account);
-    const provider = getProvider(); // see "Detecting the Provider"
-    console.log(provider);
 
     useEffect(()=> {
         console.log("DashBoard Rerender");
