@@ -1,13 +1,14 @@
-import { AddAdsModalTop, DetailAdsView } from "./detail";
+import { DetailAdsView } from "./detail";
+import AddAdsModalTop from "./ModalTop";
 import { useNavigate } from "react-router-dom";
 import { UseCone,ConePositionValue, SetConeTempValue } from "../../../redux/ConeAssetsReducer";
-import { AdsUpload, CategorySelectValue, infoValue,TokenDepositValue,AdsRewardValue, fileInfo, AdsCid } from "../../../redux/AdsUploadReducer";
+import { AdsUpload, CategorySelectValue, infoValue,TokenDepositValue,AdsRewardValue, AdsCid, LocationValue } from "../../../redux/AdsUploadReducer";
 import { useDispatch,useSelector } from "react-redux";
 import { StepCircle } from "./addAdsStep";
 import CheckConeMap from "../../map/checkConeMap";
 import axios from "axios";
 import { Account } from "../../../redux/AccountReducer";
-const ServerURL = "localhost:8000";
+const ServerURL = "http://localhost:8000";
 const BackNextButton = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -21,7 +22,7 @@ const BackNextButton = () => {
       );
     };
     const Upload = () => {
-      const Position = useSelector(ConePositionValue);
+      const ConePosition = useSelector(ConePositionValue);
       const basket = useSelector(SetConeTempValue);
       const detailData = useSelector(infoValue);
       const CategoryValue = useSelector(CategorySelectValue);
@@ -29,7 +30,7 @@ const BackNextButton = () => {
       const RewardToken = useSelector(AdsRewardValue);
       const account = useSelector(Account);
       const cid = useSelector(AdsCid);
-
+      const Location = useSelector(LocationValue);
       const uploadData = {
         User: account,
         Title: detailData[0].title,
@@ -37,21 +38,23 @@ const BackNextButton = () => {
         Category: CategoryValue,
         DepositToken: DepositToken,
         RpP: RewardToken,
-        Position: Position,
-        AdsCid: cid
+        Position: ConePosition,
+        AdsCid: cid,
+        StoreLocation: Location
       };
+      console.log(uploadData);
       const Save =async()=> {
-        const result = await axios.post(`http://${ServerURL}/upload`, {
+        const result = await axios.post(`${ServerURL}/upload`, {
           Data: uploadData, 
         });
         console.log(result.data);
-        dispatch(AdsUpload([Position,basket]));
+        dispatch(AdsUpload([ConePosition,basket]));
         dispatch(UseCone(account));
         navigate("/",{ replace: true });
       }
       return (
         <div
-          onClick={Save}
+          onClick={()=>Save()}
           className="ModalSmallButton">
           Upload
         </div>

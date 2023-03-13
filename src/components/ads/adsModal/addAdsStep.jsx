@@ -14,6 +14,7 @@ export const StepCircle = () => {
   const DepositToken = useSelector(TokenDepositValue);
   const RewardToken = useSelector(AdsRewardValue);
   const Position = useSelector(ConePositionValue);
+  console.log(Position);
   const location = useLocation();
   const Detail = () => {
     switch (location.pathname) {
@@ -46,8 +47,11 @@ export const StepCircle = () => {
 
   const SetCone = () => {
     switch (location.pathname) {
-      case "/SetCone": return <ColorCircle/>
-      case "/Check": if (Position[0] === undefined) return <WarningCircle/>
+      case "/SetCone": return <ColorCircle/>;
+      case "/Check": {
+        if (Position[0] === undefined || Position[0] === null) return <WarningCircle/>;
+        else return <CollectCircle/>
+    }
       default: {
         if (Position[0] === undefined) return <DefaultCircle/>
         else return <CollectCircle/>

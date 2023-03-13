@@ -27,7 +27,6 @@ export const Loading =() => {
 
 export const AdsUpload = () => {
   document.body.style = `overflow-y: hidden;`;
-  // const { mutateAsync: upload } = useStorageUpload();
   const account = useSelector(Account);
   const navigate = useNavigate();
   const location = useLocation();
@@ -96,26 +95,27 @@ export const AdsUpload = () => {
       name: account,
       Title: Title,
       keyvalues: {
-        exampleKey: 'exampleValue'
+        YourD: Title,
       }
     })
     formData.append("metadata", metadata);
 
-    //preview image url저장
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => {
-      const base64 = reader.result.toString();
-      dispatch(fileUpload(base64));
-    }
-
-    // Authorization: `${process.env.REACT_APP_PINATA_API_JWT}`,
     if (file) {
       try{
         const result = await axios.post("/adsfile",formData);
         // const result = await axios.post("https://www.yourdserver.store/adsfile",formData);
         console.log(result.data);
         dispatch(AdsCidStore(result.data));
+        if(file.type.split("/")[0] === "image") {
+          const reader = new FileReader();
+          reader.readAsDataURL(file);
+          reader.onload = () => {
+            const base64 = reader.result.toString();
+            dispatch(fileUpload(base64));
+          }
+        } else {
+            dispatch(fileUpload(result.data))
+        }
         navigate("/Detail", { state: { background: location } });
 
             // dispatch(AdsCidStore(result.data.IpfsHash));
@@ -124,7 +124,9 @@ export const AdsUpload = () => {
         navigate(-1);
       }
     }
+        //preview image url저장
   }
+  
   
   return (
     <div className="Container">
@@ -136,6 +138,7 @@ export const AdsUpload = () => {
             <input
               type="file"
               id="fileUpload"
+              accept="video/*, image/*"
               style={{ display: "none" }}
               onChange={inputfile}
             />

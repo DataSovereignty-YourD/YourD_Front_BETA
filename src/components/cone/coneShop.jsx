@@ -1,5 +1,3 @@
-import { Icon } from "@iconify/react";
-
 import { useDispatch, useSelector } from "react-redux";
 import {
   ConeAssetsStore,
@@ -8,35 +6,13 @@ import {
   TotalCountValue,
   ExampleConeDistanceValue,
   TotalPriceValue,
-  ExampleConeReset,
   ExamConeRemove,
-  ConeAssetsValue
 } from "../../redux/ConeAssetsReducer";
 import { useState, Fragment, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import ExamMap from "../map/coneShopMap";
-import axios from "axios";
 import { Account } from "../../redux/AccountReducer";
-
-const Top = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
-  return (
-    <div className="ModalTop">
-      <div className="ModalTitle">ConeShop</div>
-      <div
-        className="CloseButton"
-        onClick={() => {
-          dispatch(ExampleConeReset());
-          navigate("/");
-        }}
-      >
-        <Icon icon="mingcute:close-fill" color="white" width="30" />
-      </div>
-    </div>
-  );
-};
+import AddAdsModalTop from "../ads/adsModal/ModalTop";
 
 const ConeList = [
   { distance: "100m", color: "#2F88FF", Price: 10 },
@@ -45,9 +21,6 @@ const ConeList = [
   { distance: "1km", color: "#FFF615", Price: 100 },
   { distance: "2km", color: "#67E01C", Price: 200 },
   { distance: "5km", color: "#1ED7E2", Price: 500 },
-  { distance: "10km", color: "#AB2DE7", Price: 1000 },
-  { distance: "20km", color: "#CC3FA4", Price: 2000 },
-  { distance: "50km", color: "#000000", Price: 5000 },
 ];
 
 const Payment = () => {
@@ -181,7 +154,7 @@ const ConeShop = () => {
     <div className="Container">
       <div className="Background">
         <div className="Modal">
-          <Top />
+          <AddAdsModalTop />
           <section className="Modal_body">
             <section className="ConeShop_body_Left">
               <ExamMap/>

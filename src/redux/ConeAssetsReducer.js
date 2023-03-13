@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { act } from "react-dom/test-utils";
+
 const initialState = {
   ConeAssets: [],
   ExampleConeDistance: [],
@@ -61,6 +61,7 @@ export const ConeAssetsSlice = createSlice({
     },
     TempConeReset: (state)=> {
       state.SetConeTemp = [];
+      state.ConePosition = [];
     },
     ConePositionStore: (state, action)=> {
       state.ConePosition = action.payload;

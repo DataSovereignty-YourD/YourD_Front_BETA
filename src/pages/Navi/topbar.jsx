@@ -1,13 +1,12 @@
 import { Icon } from "@iconify/react";
 import axios from "axios";
 import {   useEffect,  useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import {  useLocation, useNavigate } from "react-router-dom";
 import ConnectWallet from "../../components/account/ConnectWallet";
-import {  getProvider } from "../../functions/Account/ConnectAccount";
-import { Account, AccountStore } from "../../redux/AccountReducer";
-const ServerURL="http://localhost:8000/";
-const DevURL="https://www.yourdserver.store/"
+import { Account } from "../../redux/AccountReducer";
+const ServerURL="http://localhost:8000";
+// "https://www.yourdserver.store/"
 
 
 const TopBar = () => {
@@ -54,8 +53,7 @@ const TopBar = () => {
   async function LoadAdsInfo() {
     console.log(storedaccount);
     if(account !== "" && account !== undefined) {
-      const AdsInfo = await axios.post("http://localhost:8000/loadadsinfo", {Account: account});
-      // const AdsInfo = await axios.post("https://www.yourdserver.store/loadAdsInfo", account);
+      const AdsInfo = await axios.post(`${ServerURL}/loadadsinfo`, {Account: account});
       if(AdsInfo.data === "None") navigate("/AdsUploadModal", {state: {background: location}});
       else alert("Only one advertisement can be registered.");
   } else  alert("Connect Wallet");

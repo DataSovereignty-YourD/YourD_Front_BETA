@@ -1,15 +1,15 @@
 import React, { Fragment, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { StepCircle } from "./addAdsStep";
-import { AddAdsModalTop, DetailAdsView } from "./detail";
+import { DetailAdsView } from "./detail";
+import AddAdsModalTop from "./ModalTop";
+import { useDispatch, useSelector } from "react-redux";
 import {
   CategorySelectValue,
   Categorydatastore,
   DepositValue,
-  TokenDepositValue,
   AdsRewardStore,
 } from "../../../redux/AdsUploadReducer";
-import { useDispatch, useSelector } from "react-redux";
 
 const CATEGORY_LIST = [
   { id: 0, data: "Art" },
@@ -108,7 +108,6 @@ const VideoInfoBody = () => {
 
   const Deposit =()=> {
     const dispatch = useDispatch();
-    const DepositTokenValue = useSelector(TokenDepositValue);
     const TokenValuehandler =()=> {
       const TokenValue = document.getElementById("DepositValue");
       dispatch(DepositValue(TokenValue.value));

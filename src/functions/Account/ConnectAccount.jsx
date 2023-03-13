@@ -1,4 +1,3 @@
-import { AccountStore } from "../../redux/AccountReducer";
 import CheckDBAccount from "./CheckDBAccount";
 
 export async function Connect() {

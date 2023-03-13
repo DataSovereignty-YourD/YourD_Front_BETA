@@ -1,37 +1,19 @@
-import { Icon } from "@iconify/react";
+
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { fileInfo, detailinfo, infoValue, ModalCloseAction, fileTitle } from "../../../redux/AdsUploadReducer";
-import { TempConeReset } from "../../../redux/ConeAssetsReducer";
+import { fileInfo, detailinfo, infoValue } from "../../../redux/AdsUploadReducer";
 import { StepCircle } from "./addAdsStep";
+import AddAdsModalTop from "./ModalTop";
+import ReactPlayer from 'react-player/lazy';
 
-export const AddAdsModalTop = () => {
-  
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
-    const title = useSelector(fileTitle);
-    const ModalClose =()=> {
-      dispatch(TempConeReset());
-      dispatch(ModalCloseAction());
-      navigate("/");
-    }
-
-    return (
-      <div className="ModalTop">
-        <div className="ModalTitle">{title}</div>
-        <div onClick={ModalClose} className="CloseButton">
-          <Icon icon="mingcute:close-fill" color="white" width="30" />
-        </div>
-      </div>
-    );
-}
 
 const DetailBody = () => {
   const [TitleValue,SetTitleValue] = useState("");
   const [DescriptionValue,SetDescriptionValue] = useState("");
   const dispatch = useDispatch();
   const info = useSelector(infoValue);
+  
   const Title = info[0].title;
   const Description = info[0].description;
   
@@ -67,26 +49,29 @@ const DetailBody = () => {
 
 
 export const DetailAdsView = () => {
-  const navigate = useNavigate();
-  const location = useLocation();
   const adsfile = useSelector(fileInfo);
-  
-  // useEffect(()=> {
-  //   if (adsfile.toString().length === 0) {
-  //     navigate("/AdsUploadModal", { state: { background: location } });
-  //   }
-  // },)
+  const adstype = (adsfile.toString().length>70);
 
+  function Base64Image(ads) {
+    return <img src={ads} alt="AdsPreview" style={{width: "250px", height:"auto", borderRadius: "12px"}}/>
+  }
+  function Video(ads) {
+    return <div>
+      <ReactPlayer 
+      width={"250px"}
+      height={"auto"}
+      controls={true}
 
-  function Base64Image(adsfile) {
-    return <img src={adsfile} alt="image" style={{width: "250px", height:"auto", borderRadius: "12px"}}/>
+      light={false}
+      url= {`https://gateway.pinata.cloud/ipfs/${ads}`}/>
+    </div>
   }
 
   return (
       <section className="AdsViewSection">
         <div className="AdsViewBox">
           <div className="Preview-text">Preview</div>
-          <div className="Preview">{(adsfile)? Base64Image(adsfile): <div>error</div>}</div>
+          <div className="Preview">{(adstype)? Base64Image(adsfile): Video(adsfile)}</div>
         </div>
       </section>
   );

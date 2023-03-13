@@ -12,13 +12,11 @@ import D500Cone from "../../assets/D500Cone.svg";
 import D1000Cone from "../../assets/D1000Cone.svg";
 import D2000Cone from "../../assets/D2000Cone.svg";
 import D5000Cone from "../../assets/D5000Cone.svg";
-import D10000Cone from "../../assets/D10000Cone.svg";
-import D20000Cone from "../../assets/D20000Cone.svg";
-import D50000Cone from "../../assets/D50000Cone.svg";
 import {
   ConePositionValue,
   SetConeTempValue,
 } from "../../redux/ConeAssetsReducer";
+import { LocationValue } from "../../redux/AdsUploadReducer";
 
 function CheckConeMap() {
   const { isLoaded } = useLoadScript({
@@ -158,60 +156,7 @@ const CheckCone = () => {
           </Marker>
         );
         break;
-      case "10km":
-        marker = (
-          <Marker
-            key={index}
-            position={TempPosition[index]}
-            icon={D10000Cone}
-            draggable={false}
-          >
-            <Circle
-              center={TempPosition[index]}
-              radius={10000}
-              strokeOpacity={0.8}
-              strokeWeight={2}
-              fillOpacity={0.35}
-            />
-          </Marker>
-        );
-        break;
-      case "20km":
-        marker = (
-          <Marker
-            key={index}
-            position={TempPosition[index]}
-            icon={D20000Cone}
-            draggable={false}
-          >
-            <Circle
-              center={TempPosition[index]}
-              radius={20000}
-              strokeOpacity={0.8}
-              strokeWeight={2}
-              fillOpacity={0.35}
-            />
-          </Marker>
-        );
-        break;
-      case "50km":
-        marker = (
-          <Marker
-            key={index}
-            position={TempPosition[index]}
-            icon={D50000Cone}
-            draggable={false}
-          >
-            <Circle
-              center={TempPosition[index]}
-              radius={50000}
-              strokeOpacity={0.8}
-              strokeWeight={2}
-              fillOpacity={0.35}
-            />
-          </Marker>
-        );
-        break;
+      
       default:
         break;
     }
@@ -221,6 +166,7 @@ const CheckCone = () => {
 };
 
 export const Map = ({ currentPosition }) => {
+  const StoreLocation = useSelector(LocationValue);
   return (
     <GoogleMap
       zoom={15}
@@ -228,6 +174,9 @@ export const Map = ({ currentPosition }) => {
       mapContainerClassName="map-container1"
     >
       {CheckCone()}
+      <Marker
+        position={StoreLocation}
+      />
     </GoogleMap>
   );
 };

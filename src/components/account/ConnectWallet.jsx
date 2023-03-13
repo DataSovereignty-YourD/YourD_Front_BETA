@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
-import { useSelector,useDispatch } from "react-redux";
-import { Connect, getProvider } from "../../functions/Account/ConnectAccount";
+import {  useState } from "react";
+import {useDispatch } from "react-redux";
+import { Connect } from "../../functions/Account/ConnectAccount";
 import { ReadDBAsset } from "../../redux/ConeAssetsReducer";
 import { AccountStore } from "../../redux/AccountReducer";
 import axios from "axios"
@@ -10,20 +10,6 @@ const ServerURL= "http://localhost:8000"
 export default function ConnectWallet({StoredAccount, SetState}) {
     const [Account, setAccount] = useState(StoredAccount);
     const dispatch = useDispatch();
-    const provider = getProvider();
-
-    provider.on("accountChanged", (publicKey) => {
-      if (publicKey) {
-        // Set new public key and continue as usual
-        console.log(publicKey.toBase58());
-        const changedAccount = publicKey.toBase58();
-        setAccount(changedAccount);
-        dispatch(AccountStore(changedAccount));
-        SetState({changedAccount});
-      } else {
-        provider.connect().cetch((error)=>console.log(error))
-      }
-    });
 
     const getAccount = async () => {
         await Connect().then((res) => {

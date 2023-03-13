@@ -1,36 +1,11 @@
-import { AddAdsModalTop } from "./detail";
+import AddAdsModalTop  from "./ModalTop";
 import { useNavigate,useLocation,Link } from "react-router-dom";
 import { StepCircle } from "./addAdsStep";
 import { ConeAssetsValue, SetConeTemp,SetConeTempValue } from "../../../redux/ConeAssetsReducer";
 import {  useDispatch, useSelector} from "react-redux";
 import SetConeMap from "../../map/setConeMap";
 import { useEffect, useMemo, useState } from "react";
-const BackNextButton = () => {
-  const navigate = useNavigate();
-  const location = useLocation();
-  
-  const Back = () => {
-    return (
-      <div className="ModalSmallButton" onClick={() => navigate(-1)}>
-        Back
-      </div>
-    );
-  };
-  const Next = () => {
-    return (
-      <Link to="/Check" state={{ background: location }} className="ModalSmallButton">
-        Next
-      </Link>
-    );
-  };
 
-  return (
-    <div className="ButtonPosition">
-      <Back />
-      <Next />
-    </div>
-  );
-};
 
 const ConeBalance = () => {
   const ConeAsset = useSelector(ConeAssetsValue);
@@ -50,9 +25,6 @@ const ConeBalance = () => {
       { color: "#FFF615", Distance: "1km", Count: 0 },
       { color: "#67E01C", Distance: "2km", Count: 0 },
       { color: "#1ED7E2", Distance: "5km", Count: 0 },
-      { color: "#AB2DE7", Distance: "10km", Count: 0 },
-      { color: "#CC3FA4", Distance: "20km", Count: 0 },
-      { color: "#000000", Distance: "50km", Count: 0 },
     ];
 
     ConeTemp.forEach((distance) => {
@@ -90,6 +62,7 @@ const ConeBalance = () => {
     </div>
   );
 
+
   return(
     <section className="BalanceSection">
       {count.map((item) => (
@@ -116,6 +89,18 @@ const SetConePage = () => {
           </div>
         </div>
       </div>
+    </div>
+  );
+};
+const BackNextButton = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+
+  return (
+    <div className="ButtonPosition">
+      <div className="ModalSmallButton" onClick={() => navigate(-1)}>Back</div>
+      <Link to="/Check" state={{ background: location }} className="ModalSmallButton">Next</Link>
     </div>
   );
 };
