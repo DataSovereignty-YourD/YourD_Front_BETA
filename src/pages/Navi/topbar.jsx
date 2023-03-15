@@ -4,6 +4,8 @@ import {   useEffect,  useState } from "react";
 import { useSelector } from "react-redux";
 import {  useLocation, useNavigate } from "react-router-dom";
 import ConnectWallet from "../../components/account/ConnectWallet";
+import logo from "../../assets/D-Ad.png";
+
 // import { GetBalance } from "../../functions/Account/TokenBalance";
 import { Account } from "../../redux/AccountReducer";
 const ServerURL="http://localhost:8000";
@@ -51,14 +53,14 @@ const TopBar = () => {
     );
   };
 
-  const Balance = () => {
-    // GetBalance()
-    return (
-      <div className="BalanceSection">
-        100 CAT
-      </div>
-    )
-  }
+  // const Balance = () => {
+  //   // GetBalance()
+  //   return (
+  //     <div className="BalanceSection">
+  //       100 CAT
+  //     </div>
+  //   )
+  // }
 
   async function LoadAdsInfo() {
     console.log(storedaccount);
@@ -73,7 +75,7 @@ const TopBar = () => {
     <div className="TopBar">
       <section className="leftSection">
         <MenuButton/>
-        <div className="Logo">D-AD</div>
+        <img src={logo} style={{height:"40px", marginLeft:"30px"}}/>
       </section>
       <section className="Button_sction">
         <div onClick={() => {
@@ -86,7 +88,7 @@ const TopBar = () => {
         <div onClick={() => LoadAdsInfo()}>
           <AddAds/>
         </div>
-        <Balance/>
+        {/* <Balance/> */}
         <ConnectWallet StoredAccount={account} SetState={setAccount}/>
       </section>
     </div>

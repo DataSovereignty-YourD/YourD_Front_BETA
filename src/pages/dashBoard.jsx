@@ -8,6 +8,7 @@ import { getProvider } from "../functions/Account/ConnectAccount";
 import { Account } from "../redux/AccountReducer";
 // import { Connection     }from "@solana/web3.js";
 
+import img2 from "../assets/adsmanager2.png";
 const DashBoard = () => {
     const account = useSelector(Account);
 
